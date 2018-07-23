@@ -39,6 +39,7 @@ Hackathon project involving the combination of different data sources into an ap
 - Team 4
   - Matthew Kirby
   - Howard Kim
+  - Andrew Oautu
   - Mike Yim
   - Sean Prouty
 
