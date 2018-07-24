@@ -6,20 +6,22 @@
     <meta charset="utf-8">
     <link rel= "stylesheet" type="text/css" href="food.css">
     <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
     <script src = "food.js"></script>
-
+    <script src = "nutrient.js"></script>
   </head>
   <body>
       <div class = "container">
         <div class ="leftSideDisplay">
-          <div id="map">
+          <div id="mapAndPic">
+              <div id="pic"></div>
+              <div id="map"></div>
         </div>
           <!-- <input class = "searchBar" type="text"  class='controls'> -->
-          <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-          <button class = "submit">Submit</button>
+          <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"> -->
+          <button class = "submit" id="findMore">Find places near me</button>
         </div>
       <div class = "rightSideDisplay">
         <div class = "nutrition">
@@ -30,9 +32,6 @@
         </div>
       </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf0RUrkeLLSZKUopnWsCT_jRlLvdv5I1w&libraries=places&callback=initMap" async defer></script>
-
-    <script src ="https://maps.googleais.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBf0RUrkeLLSZKUopnWsCT_jRlLvdv5I1w"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD08VLkun5YCMQytEJFegXC0W70ODQkf-Y&libraries=places&callback=initAutocomplete"></script>
   </body>
 </html>
