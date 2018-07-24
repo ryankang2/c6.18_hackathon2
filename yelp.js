@@ -2,5 +2,8 @@
 $(document).ready(googleIndex.html);
 
 function requestYelpData (address, location) {
-    
+    let key = {
+
+    }
+    let
 }
