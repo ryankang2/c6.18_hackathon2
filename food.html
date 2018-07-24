@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Place Searches</title>
+    <title>food.html</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel= "stylesheet" type="text/css" href="food.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="food.js"></script>
-    <!-- <script src="yelp.js"></script> -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src = "food.js"></script>
 
   </head>
   <body>
@@ -15,7 +17,8 @@
         <div class ="leftSideDisplay">
           <div id="map">
         </div>
-          <input class = "searchBar" type="text" id='autocomplete'>
+          <!-- <input class = "searchBar" type="text"  class='controls'> -->
+          <input id="pac-input" class="controls" type="text" placeholder="Search Box">
           <button class = "submit">Submit</button>
         </div>
       <div class = "rightSideDisplay">
@@ -28,6 +31,8 @@
       </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf0RUrkeLLSZKUopnWsCT_jRlLvdv5I1w&libraries=places&callback=initMap" async defer></script>
-    <script src="https://maps.googleais.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBf0RUrkeLLSZKUopnWsCT_jRlLvdv5I1w"></script>
+
+    <script src ="https://maps.googleais.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBf0RUrkeLLSZKUopnWsCT_jRlLvdv5I1w"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD08VLkun5YCMQytEJFegXC0W70ODQkf-Y&libraries=places&callback=initAutocomplete"></script>
   </body>
 </html>
