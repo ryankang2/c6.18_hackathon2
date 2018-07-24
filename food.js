@@ -22,7 +22,7 @@ function initAutocomplete() {
             // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            infoWindow.setContent('You are Here');
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
@@ -71,23 +71,25 @@ function initAutocomplete() {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
                 origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
+                anchor: new google.maps.Point(17, 34),// 17 34
                 scaledSize: new google.maps.Size(25, 25)
             };
 
             var infoWindow = new google.maps.InfoWindow({
-                content: `${place.name} <br> Address: ${place.formatted_address}<br> Rating: ${place.rating} `,
+                content: `${place.name} <br> Rating: ${place.rating} `,
+                pixelOffset: new google.maps.Size(0, 0)
             });
 
             var markerLocation = new google.maps.Marker({
                 map: map,
-                icon: icon,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
                 title: place.name,
                 position: place.geometry.location
             });
 
             markerLocation.addListener('click', function() {
                 infoWindow.open(map, markerLocation);
+                testClick(place.formatted_address);
             });
 
             // Create a marker for each place.
@@ -102,4 +104,8 @@ function initAutocomplete() {
         });
         map.fitBounds(bounds);
     });
+}
+
+function testClick(addr){
+    console.log('From test click:', addr);
 }
