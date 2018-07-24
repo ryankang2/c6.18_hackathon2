@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="searchMap.css">
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="foodApiSB.js"></script>
     <script>
         var infoWindow;
 
@@ -82,7 +82,7 @@
                     };
 
                     var infoWindow = new google.maps.InfoWindow({
-                        content: 'hello',
+                        content: `${place.name} <br> Address: ${place.formatted_address}<br> Rating: ${place.rating} `,
                     });
 
                     var markerLocation = new google.maps.Marker({
