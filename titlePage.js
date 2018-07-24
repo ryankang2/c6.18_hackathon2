@@ -30,6 +30,8 @@ function changePage () {
 }
 
 function retrieveInput () {
-    foodInput = $("#foodInput").val();
-    console.log("food input: ", foodInput);
+    foodInput = $("#food").val();
+    var food = sessionStorage;
+    food.setFood = foodInput;
+    console.log("food input: ", foodInput); 
 }

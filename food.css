@@ -1,13 +1,37 @@
        #map {
-         height: 60%;
-         width: 60%;
+         height: 100%;
+         width: 100%;
          margin: 0;
          position: relative;
          left: 50%;
          top: 50%;
          transform: translate(-50%, -50%);
-         display: block;
-         /* display: none; */
+         /* display: block; */
+         display: none;
+       }
+       
+       #pic{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        /* display: none; */
+       }
+
+       #mapAndPic{
+        height: 60%;
+        width: 60%;
+        margin: 0;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        /* display: none; */
        }
 
        html,

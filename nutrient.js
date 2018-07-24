@@ -1,12 +1,15 @@
 $(document).ready(initializeApp);
 
+let foodItem = sessionStorage.getItem("setFood");
+console.log("food Item: ", foodItem);
+
+
 function initializeApp(){
-    $('#search').click(nutritionCallFromServer);
+    nutritionCallFromServer();
 }
 
 function nutritionCallFromServer(){
-    console.log("clicked");
-    let userQuery = $('#food').val();
+    let userQuery = foodItem;
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-app-id": "d38bcc0d",
@@ -28,7 +31,11 @@ function nutritionCallFromServer(){
             console.log(response);
             let src = response.foods[0].photo.highres;
             let img = $('<img>').attr('src', src);
-            $('.test').append(img);
+            img.css({
+                "height": "100%",
+                 "width": "100%"
+            })
+            $('#pic').html(img);
         },
         error: function(){
             console.log('error');
