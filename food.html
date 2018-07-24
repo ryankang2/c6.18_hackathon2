@@ -4,12 +4,15 @@
     <title>food.html</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link rel= "stylesheet" type="text/css" href="food.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
       crossorigin="anonymous"></script>
     <script src = "food.js"></script>
+    <script src = "yelp.js"></script>
     <script src = "nutrient.js"></script>
   </head>
   <body>
@@ -27,11 +30,27 @@
         <div class = "nutrition">
 
         </div>
-        <div class = "twitter">
-
+        <div class = "yelp hidden container">
+          <div class="row">
+            <div class="yelpImage">
+              <img src="img/turtle_burger.png">
+            </div>
+            <div class="yelpTitle nav-wrapper orange">
+              <div class="name">Taco Bell</div>
+              <div class="rating">4.0, 3stars, 100 reviews, $$</div>
+              <div class="type">Mexcican</div>
+              <div class="openOrClosed green">Open</div>
+              <button class="link btn red hoverable">Website</button>
+            </div>
+            <div class="yelpInfo">
+              <div class="address">9200 Irvine</div>
+              <div class="phone">911-911-9111</div>
+              <div class="hours"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD08VLkun5YCMQytEJFegXC0W70ODQkf-Y&libraries=places&callback=initAutocomplete"></script>
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD08VLkun5YCMQytEJFegXC0W70ODQkf-Y&libraries=places&callback=initAutocomplete"></script>
   </body>
 </html>
