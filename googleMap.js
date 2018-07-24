@@ -1,10 +1,20 @@
 
+debugger;
 var map;
 // define an infowindow variable
 var infowindow;
 
+//waits for the input
+function userInputForFood(){
+  // var foodType = $('#autocomplete').val();
+  $('#foodSearch').click(()=>initMap($('#autocomplete').val()));
+
+}
+
 // function called by the js script tag from google at the bottome of the html file
-function initMap() {
+function initMap(foodType) {
+    infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
     // define variable object with keys of lat and long values need to be numbers
   var pyrmont = {lat: 33.6846, lng: -117.826};
 // map is a new google map appended to the element with the id of map
@@ -12,16 +22,34 @@ function initMap() {
     // set the center of the map
     center: pyrmont,
     // set zoom lower is zoom out higher is zoom in, 15-17 is recommended
-    zoom: 17
+    zoom: 15
   });
-//
-  infowindow = new google.maps.InfoWindow();
-  var service = new google.maps.places.PlacesService(map);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            var clickHandler = new ClickEventHandler(map, pos);
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // this is not implemented yet
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 
   service.nearbySearch({
     location: pyrmont,
     radius: 2000,
-    type: ['meal_takeaway']
+    type: foodType,
   }, callback);
 }
 
