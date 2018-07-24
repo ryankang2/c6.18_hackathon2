@@ -1,11 +1,12 @@
 $(document).ready(initializeApp);
 
 function initializeApp(){
-    $('#food').click(nutritionCallFromServer);
+    $('#search').click(nutritionCallFromServer);
 }
 
 function nutritionCallFromServer(){
-    let userQuery = $('#foodInput').val();
+    console.log("clicked");
+    let userQuery = $('#food').val();
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-app-id": "d38bcc0d",
