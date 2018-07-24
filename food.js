@@ -1,5 +1,3 @@
-
-debugger;
 var map;
 // define an infowindow variable
 var infowindow;
@@ -32,7 +30,7 @@ function initMap(foodType) {
                 lng: position.coords.longitude
             };
 
-            var clickHandler = new ClickEventHandler(map, pos);
+            //var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
