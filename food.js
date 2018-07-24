@@ -1,5 +1,3 @@
-
-debugger;
 var map;
 // define an infowindow variable
 var infowindow;
