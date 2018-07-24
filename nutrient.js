@@ -1,7 +1,7 @@
 $(document).ready(initializeApp);
 
-let foodItem = sessionStorage.getItem("setFood");
-console.log("food Item: ", foodItem);
+let food = sessionStorage.getItem("setFood");
+console.log("food Item: ", food);
 
 
 function initializeApp(){
@@ -9,7 +9,7 @@ function initializeApp(){
 }
 
 function nutritionCallFromServer(){
-    let userQuery = foodItem;
+    let userQuery = food;
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-app-id": "d38bcc0d",
