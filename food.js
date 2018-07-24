@@ -1,6 +1,19 @@
-
-
 var infoWindow;
+
+$(document).ready(applyClickHandler);
+
+/**
+ * Apply click handler to FindMore button
+ */
+function applyClickHandler(){
+  $("#findMore").click(showMap);
+}
+
+function showMap(){
+  $("#pic").hide();
+  $("#map").show();
+}
+
 
 function initAutocomplete() {
     var origin = {lat: -33.8688, lng: 151.2195};
@@ -59,7 +72,13 @@ function initAutocomplete() {
         });
         markers = [];
 
-        // For each place, get the icon, name and location.
+        // For each place, get the 
+      
+      
+      
+      
+      
+      , name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             console.log(place);

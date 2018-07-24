@@ -1,83 +1,120 @@
        #map {
-        height: 60%;
-        width:60%;
-        margin: 0;
-        position: relative;
-        left: 50%;
-        top:50%;
-        transform: translate(-50%, -50%);
-        display: block;
-  
-      }
-    
-      html, body {
-        height: 100%;
-        width:100%;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        height: 100%;
-        width:100%;
-        display: inline-block;
-      }
-      .leftSideDisplay {
-        height: 100%;
-        width: 50%;
-        border: 2px solid blue;
-        position: relative;
-        float: left;
+         height: 100%;
+         width: 100%;
+         margin: 0;
+         position: relative;
+         left: 50%;
+         top: 50%;
+         transform: translate(-50%, -50%);
+         /* display: block; */
+         display: none;
+       }
        
-      }
-      .submit {
-        height: 10%;
-        position: absolute;
-        background-color: green;
-        bottom: 10%;
-        right: 15%; 
-        font-size: 1vmin;     
-      
-      }
-      .searchBar{
-        width: 40%;
-        height:3%;
-        display: block;
-        position: relative;
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: pink;
-      }
-      .rightSideDisplay {
+       #pic{
         height: 100%;
-        width: 48%;
-        border: 2px solid green;
-        position: relative;
-        left: 50%;
+        width: 100%;
         margin: 0;
-      }
-
-      .nutrition {
-        height: 35%;
-        width: 50%;
-        border: 2px red solid;
-        position: relative; 
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
         display: block;
-        top: 15%;
-        left: 50%;
-        transform: translate(-50%, -25%);
-      }
+        /* display: none; */
+       }
 
-      .twitter {
-        height: 50%;
-        width: 50%;
-        border: 2px dotted blue;
+       #mapAndPic{
+        height: 60%;
+        width: 60%;
+        margin: 0;
         position: relative;
-        top: 25%;
         left: 50%;
-        transform: translate(-50%, -25%);
-      }
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        /* display: none; */
+       }
 
+       html,
+       body {
+         height: 100%;
+         width: 100%;
+         margin: 0;
+         padding: 0;
+       }
 
+       .container {
+         height: 100%;
+         width: 100%;
+         display: inline-block;
+       }
 
+       .leftSideDisplay {
+         height: 100%;
+         width: 50%;
+         border: 2px solid blue;
+         position: relative;
+         float: left;
+       }
 
+       .submit {
+         height: 10%;
+         position: absolute;
+         background-color: orange;
+         bottom: 10%;
+         right: 19%;
+         border-radius: 15px;
+         color: #fff;
+         font-size: 3vmin;
+         box-shadow: 0 9px #999;
+       }
+
+       .submit:hover{
+         background-color: rgb(187, 126, 13);
+       }
+
+       .submit:active{
+        background-color: rgb(187, 126, 13);
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+       }
+
+       .searchBar {
+         width: 40%;
+         height: 3%;
+         display: block;
+         position: relative;
+         top: 25%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: pink;
+       }
+
+       .rightSideDisplay {
+         height: 100%;
+         width: 48%;
+         border: 2px solid green;
+         position: relative;
+         left: 50%;
+         margin: 0;
+       }
+
+       .nutrition {
+         height: 35%;
+         width: 50%;
+         border: 2px red solid;
+         position: relative;
+         display: block;
+         top: 15%;
+         left: 50%;
+         transform: translate(-50%, -25%);
+       }
+
+       .twitter {
+         height: 50%;
+         width: 50%;
+         border: 2px dotted blue;
+         position: relative;
+         top: 25%;
+         left: 50%;
+         transform: translate(-50%, -25%);
+       }
