@@ -49,9 +49,7 @@ function getYelpDetails (id) {
         url: customUrl,
         method: "POST",
         dataType: "json",
-        success: function (response) {
-            console.log("Business Detail   :", response);
-        },
+        success:  createYelpDisplay,
         error: function () {
             console.log("fail")
         }
@@ -63,6 +61,23 @@ function getYelpDetails (id) {
  * @param  {} object response from yelp api
  * Function the displays the data to dom dynamically
  */
-function createYelpDisplay(object) {
-    
+function createYelpDisplay(response) {
+    let name = response.name;
+    $(".name").text(name);
+    let phone = response.display_phone;
+    $('.phone').text(phone);
+    let price = response.price;
+    let reviewCount = response.review_count;
+    let rating = response.rating;
+    $('.reviews').text( ` ${price} , ${reviewCount} reviews, ${rating}/5 Stars`)
+    let type = response.categories[0].title;
+    $('.type').text(type);
+    let displayAddress = response.location.display_address[0];
+    $('.address').text(displayAddress);
+    let openStatus = response.is_closed;
+    if(openStatus) {
+        $('.openOrClosed').text("Closed").css('color','red');
+    } else {
+        $('.openOrClosed').text("OPEN").css('color','green');
+    }
 }
