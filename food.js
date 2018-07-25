@@ -1,6 +1,15 @@
 var infoWindow;
 
-$(document).ready(applyClickHandler);
+$(document).ready(initializeApp);
+
+let foodInput = null;
+
+function initializeApp() {
+  applyClickHandler();
+  foodInput = sessionStorage.getItem("setFood");
+  $("#pac-input").val(foodInput);
+
+}
 
 /**
  * Apply click handler to FindMore button
@@ -12,11 +21,8 @@ function applyClickHandler(){
 function showMap(){
   $("#pic").hide();
   $("#map").show();
-}
 
-let foodInput = sessionStorage.getItem("setFood");
-console.log("foodInput: ", foodInput);
-$("#pac-input").val("foodInput");
+}
 
 function initAutocomplete() {
     var origin = {lat: -33.8688, lng: 151.2195};
@@ -34,8 +40,6 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are Here');
