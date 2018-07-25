@@ -1,4 +1,9 @@
+
 var infoWindow;
+
+var origin = {lat: -33.8688, lng: 151.2195};
+var map;
+
 
 $(document).ready(applyClickHandler);
 
@@ -15,9 +20,9 @@ function showMap(){
 }
 
 
+
 function initAutocomplete() {
-    var origin = {lat: -33.8688, lng: 151.2195};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: origin,
         zoom: 13,
         mapTypeId: 'roadmap'
@@ -131,6 +136,41 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+
+
+function displayRoute(origin, destination) {
+    var service = new google.maps.DirectionsService;
+    var display = new google.maps.DirectionsRenderer({
+        draggable: true,
+        map: map,
+        panel: document.getElementById('right-panel')
+    });
+    service.route({
+        origin: origin,
+        destination: destination,
+        // waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
+        travelMode: 'DRIVING',
+        avoidTolls: true
+    }, function(response, status) {
+        if (status === 'OK') {
+            display.setDirections(response);
+        } else {
+            alert('Could not display directions due to: ' + status);
+        }
+    });
+}
+
+function computeTotalDistance(result) {
+    var total = 0;
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+        total += myroute.legs[i].distance.value;
+    }
+    total = total / 1000;
+    document.getElementById('total').innerHTML = total + ' km';
+}
+
+
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
     console.log(arrayOfString);
@@ -138,38 +178,6 @@ function populateAddressInfo( string ) {
 
 
 }
-
-function testClick(addr){
-    console.log('From test click:', addr);
-}
-
-// function requestYelpData (keywordOrAddress = irvine,) {
-//     debugger;
-//     let key = {
-//         api_key: "XSyryzoREYThrY1P0pDAkbK9uJV0j7TVklsKegO9g9aqqqGz87SZPuhQ0Cob0jzZ6G1BCVE9JaycPHyB2OI7hXgTJYs_enS7SKr1G21Jf45cDBYbUAHOFnh-r3FWW3Yx",
-//         term: keywordOrAddress,
-//         //location: location
-//     }
-//     let yelpAPI = {
-//         data: key,
-//         url: "https://yelp.ongandy.com/businesses",
-//         method: "POST",
-//         dataType: "json",
-//         success: function (response) {
-//             console.log(response)
-//         },
-//         error: function () {
-//             console.log("fail")
-//         }
-//     }
-//     $.ajax(yelpAPI)
-// }
-
-/**
- * @param  {keywordOfAddress, location}
- * @return {list of resturants}
- * Function that pulls yelp API with keyword/address search and current location (city)
- */
 
 function requestYelpData (name, address, city) {
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
@@ -187,7 +195,7 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log("Success:    ", response);
+            console.log(response);
             var businessId= response.businesses[0].id;
             getYelpDetails(businessId);
         },
