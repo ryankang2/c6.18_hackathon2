@@ -50,7 +50,7 @@ function showMap(){
   $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
-  setTimeout(submitFormData, 0);
+  setTimeout(submitFormData, 5000);
 }
 
 
