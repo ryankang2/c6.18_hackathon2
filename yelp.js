@@ -25,7 +25,7 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            console.log("success", response);
             var businessId= response.businesses[0].id;
             getYelpDetails(businessId);
         },
@@ -49,7 +49,7 @@ function getYelpDetails (id) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log("detail:", response);
+            console.log("Business Detail   :", response);
         },
         error: function () {
             console.log("fail")
