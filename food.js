@@ -113,6 +113,7 @@ function initAutocomplete() {
                 // send sudip lat and long
                 
                 requestYelpData(name , address, cityName);
+                displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
                 testClick(place.formatted_address);
             });
 
