@@ -4,6 +4,7 @@ var infoWindow;
 var origin = {lat: 33.8688, lng: -117.2195};
 var map;
 let previousInfoWindow = false;
+let previousRoute = false;
 
 
 
@@ -158,8 +159,14 @@ function displayRoute(origin, destination) {
         travelMode: 'DRIVING',
         avoidTolls: true
     }, function(response, status) {
+        if(previousRoute) {
+            directionsDisplay.setDirections({routes: []});
+            previousRoute = false;
+        }
         if (status === 'OK') {
             display.setDirections(response);
+            previousRoute = true;
+
         } else {
             alert('Could not display directions due to: ' + status);
         }

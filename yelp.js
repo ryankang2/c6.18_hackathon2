@@ -76,6 +76,8 @@ function createYelpDisplay(response) {
     $('.type').text(type);
     let displayAddress = response.location.display_address[0];
     $('.address').text(displayAddress);
+    let businessImage = response.image_url;
+    $('#yelpImage').attr('src', businessImage);
     let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
         $('.openOrClosed').text("OPEN").css('color','green');
