@@ -25,7 +25,6 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log("success", response);
             var businessId= response.businesses[0].id;
             getYelpDetails(businessId);
         },
@@ -60,7 +59,6 @@ function getYelpDetails (id) {
  * Function the displays the data to dom dynamically
  */
 function createYelpDisplay(response) {
-    console.log("Dive Into This Object ---->   ",response);
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
