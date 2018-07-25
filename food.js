@@ -2,7 +2,7 @@
 var infoWindow;
 
 
-var origin = {lat: 33.8688, lng: -117.2195};
+var origin = {lat: 33.6348676, lng: -117.7405317};
 
 $(document).ready(initializeApp);
 
@@ -54,7 +54,7 @@ function showMap(){
   $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
-  setTimeout(submitFormData, 5000);
+  setTimeout(submitFormData, 1000);
 }
 
 
