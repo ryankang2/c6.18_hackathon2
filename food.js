@@ -1,24 +1,45 @@
 
 var infoWindow;
 
-var origin = {lat: -33.8688, lng: 151.2195};
+
+var origin = {lat: 33.8688, lng: -117.2195};
+
+$(document).ready(initializeApp);
+
+let foodInput = null;
+
+function initializeApp() {
+  applyClickHandler();
+}
+
 var map;
+let previousInfoWindow = false;
+let previousRoute = false;
 
-
-$(document).ready(applyClickHandler);
-
+let foodName = sessionStorage.getItem("setFood");
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  // need fix for foodname display
+  $(".foodName").text(foodName);
+  $("#pac-input").hide();
 }
 
+
+
+/**
+ * if user clicks button, hide the picture and show the map
+ */
 function showMap(){
   $("#pic").hide();
   $("#map").show();
-}
+  $("#pac-input").show();
+  foodInput = sessionStorage.getItem("setFood");
+  $("#pac-input").val(foodInput);
 
+}
 
 
 function initAutocomplete() {
@@ -32,17 +53,16 @@ function initAutocomplete() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are Here');
             infoWindow.open(map);
             map.setCenter(pos);
+            previousInfoWindow = infoWindow;
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -65,7 +85,7 @@ function initAutocomplete() {
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+      var places = searchBox.getPlaces();
 
         if (places.length == 0) {
             return;
@@ -107,9 +127,11 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
+                previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
                 debugger;
                 infoWindow.open(map, markerLocation);
+                previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
                 console.log(arrayOfString);
@@ -120,7 +142,6 @@ function initAutocomplete() {
                 
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
-                testClick(place.formatted_address);
             });
 
             // Create a marker for each place.
@@ -152,8 +173,11 @@ function displayRoute(origin, destination) {
         travelMode: 'DRIVING',
         avoidTolls: true
     }, function(response, status) {
+      
         if (status === 'OK') {
             display.setDirections(response);
+            previousRoute = true;
+
         } else {
             alert('Could not display directions due to: ' + status);
         }
@@ -170,39 +194,8 @@ function computeTotalDistance(result) {
     document.getElementById('total').innerHTML = total + ' km';
 }
 
-
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
     console.log(arrayOfString);
     let address
-
-
 }
-
-// function requestYelpData (name, address, city) {
-//     let customUrl = "https://yelp.ongandy.com/businesses/matches";
-//     let key = {
-//         api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
-//         name: name,
-//         address1: address,
-//         city: city,
-//         state: "CA",
-//         country: "US",
-//       }
-//     let yelpAPI = {
-//         data: key,
-//         url: customUrl,
-//         method: "POST",
-//         dataType: "json",
-//         success: function (response) {
-//             console.log(response);
-//             var businessId= response.businesses[0].id;
-//             getYelpDetails(businessId);
-//         },
-//         error: function () {
-//             console.log("fail")
-//         }
-
-//     }
-//     $.ajax(yelpAPI)
-// }
