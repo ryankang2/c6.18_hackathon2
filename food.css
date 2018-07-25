@@ -1,8 +1,8 @@
-
 table{
     background-color: green;
     width: 50px;
 }
+
 #right-panel {
    font-family: 'Roboto','sans-serif';
    line-height: 30px;
@@ -20,13 +20,14 @@ table{
 #right-panel i {
    font-size: 12px;
 }
+
 #right-panel {
    float: right;
    width: 34%;
    height: 100%;
+}
 
 * {
-  border: 1px solid black;
   box-sizing: border-box;
 }
 
@@ -34,19 +35,55 @@ table{
   width: 5%;
 }
 
-.nutritionTitles {
-  display: inline-block;
-  width: 70%
-
-}
-
-.nutritionValue {
-  display: inline-block;
-  width: 25%;
-  text-align: right;
+.nav-wrapper {
+  border: 2px solid black;
 }
 
 #map {
-  height: 50vh;
+  margin-top: 4%;
+}
+
+.nutritionTitles {
+  display: inline-block;
+  width: 70%
+}
+
+.nutrition {
+  margin-top: 5%;
+}
+
+.nutritionTitles {
+  display: inline-block;
+  width: 100%
+}
+
+#map {
+  height: 80vh;
   display: none;
+}
+
+.nutritionTitles .right-align {
+  float: right;
+}
+
+.nutrition > div {
+  border: 2px solid black;
+}
+
+.nutritionTitles > div {
+  border: 1px solid black;
+}
+
+.yelp {
+  width: 90%;
+}
+
+.yelpImage img {
+  width: 100%;
+  position: relative;
+}
+
+.yelp > div {
+  border: 2px solid black;
+  margin-top: 10%;
 }
