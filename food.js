@@ -1,37 +1,50 @@
+$(document).ready(initializeApp);
 
 var infoWindow;
 
-var origin = {lat: 33.8688, lng: -117.2195};
+var origin = {lat: 33.6348676, lng: -117.7405317};
 
 $(document).ready(initializeApp);
 
 let foodName = sessionStorage.getItem("setFood");
-
-function initializeApp() {
-  applyClickHandler();
- 
-}
-
 var map;
 let previousInfoWindow = false;
 let previousRoute = false;
 
+function initializeApp() {
+  applyClickHandler();
+}
+
+
 /**
- * Apply click handler to FindMore button
+ * Make a function applyClickHandlers 
+ * params { none };
+ * returns { none };
+ * 
+ * Apply click handler to the button with the if of findMore that runs the startOver function
+ * Apply click handler to reset button and logo that runs the startOver function
+ * Apply click handler to reset button that runs the startOver function
+ * Populate the search bar with the storage variable foodName
+ * Hide the search bar with the id of pac-input
+ * Apply a click handler to the button with the id of goThere have it display the model on click
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
   $("#reset").click(startOver);
   $("#logo").click(startOver);
-  // need fix for foodname display
-  $(".foodName").text(foodName);
   $("#pac-input").hide();
 }
 
+
+/**
+ * Make a function to autosubmit the input data
+ * params: { none };
+ * return: { none };
+ * Target the searchbar with the id pac-input
+ * focus on 
+ * Trigger the input equivalent to the enter button
+ */
 function submitFormData () {
-    // var e = jQuery.Event("keydown");
-    // e.which = 13;
-    // $("#pac-input").trigger(e);
     var input = document.getElementById('pac-input');
     try {
         google.maps.event.trigger( input, 'focus');
@@ -42,14 +55,17 @@ function submitFormData () {
 
 
 /**
+ * Make a function that hides the picture with an id of pic, shows the map
+ * with an id of map. Store the session storage variable as a variable called 
  * if user clicks button, hide the picture and show the map
+ * fill the search bar with the 
  */
 function showMap(){
   $("#pic").hide();
   $("#map").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
-  setTimeout(submitFormData, 5000);
+  setTimeout(submitFormData, 1000);
 }
 
 /**
@@ -119,7 +135,6 @@ function initAutocomplete() {
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
                 return;
             }
             var icon = {
@@ -134,6 +149,7 @@ function initAutocomplete() {
                 content: `${place.name} <br> Rating: ${place.rating} `,
                 pixelOffset: new google.maps.Size(0, 0)
             });
+           
 
             var markerLocation = new google.maps.Marker({
                 map: map,
@@ -144,12 +160,10 @@ function initAutocomplete() {
 
             markerLocation.addListener('click', function() {
                 previousInfoWindow.close();
-                console.log( "PLACE:  " ,place )
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
-                console.log(arrayOfString);
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
                 const name = place.name;
@@ -158,7 +172,6 @@ function initAutocomplete() {
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
             });
-
             // Create a marker for each place.
             markers.push(markerLocation);
 
@@ -243,7 +256,6 @@ function computeTotalDistance(result) {
 
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
-    console.log(arrayOfString);
 }
 
 /**
@@ -251,7 +263,6 @@ function populateAddressInfo( string ) {
  * back to first screen
  */
 function startOver(){ 
-    console.log("start over");
     location.assign("index.html");
     sessionStorage("setFood", "");
 }
