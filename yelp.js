@@ -26,7 +26,7 @@ function requestYelpData (name, address, city) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            var businessId= response.businesses[0].id
+            var businessId= response.businesses[0].id;
             getYelpDetails(businessId);
         },
         error: function () {

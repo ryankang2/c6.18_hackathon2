@@ -73,6 +73,7 @@ function initAutocomplete() {
         markers = [];
 
         // For each place, get the 
+
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             console.log(place);
