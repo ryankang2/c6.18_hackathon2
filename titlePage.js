@@ -42,6 +42,13 @@ $(function() {
  */
 function addClickHandler () {
     $(".submit").click(submitClicked);
+    //when enter is pressed
+    $(document).keyup(function(event) {
+        if ($("#food").is(":focus") && event.key == "Enter") {
+            foodInput = $("#food");
+            changePage();
+        }
+    });
 }
 
 /**
@@ -68,4 +75,6 @@ function retrieveInput () {
     foodInput = $("#food").val();
     var food = sessionStorage;
     food.setFood = foodInput;
+
+
 }

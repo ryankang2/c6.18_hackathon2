@@ -9,7 +9,7 @@ var food = sessionStorage.getItem("setFood");
 function initializeApp(){
     $(".submit").addClass("scale-in");
     $("#reset").addClass("scale-in");
-    // nutritionCallFromServer();
+    nutritionCallFromServer();
 }
 
 
@@ -24,7 +24,7 @@ function nutritionCallFromServer(){
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
-   }
+   };
    let options = {
        dataType: 'json',
        url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
