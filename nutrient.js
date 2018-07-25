@@ -3,6 +3,7 @@ $(document).ready(initializeApp);
 var food = sessionStorage.getItem("setFood");
 
 /**
+ * @param {none}
  * Once DOM is ready, get nutrition from server and add animations
  * to submit and reset button
  */
@@ -12,13 +13,16 @@ function initializeApp(){
     nutritionCallFromServer();
 }
 
-
+/**
+ * @param {none}
+ */
 function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-    // "x-app-id": "0657689d",
-    // "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       // future key (burned on July 25)
+       // "x-app-id": "0657689d",
+       // "x-app-key": "1c577a065dc2109313e314fdb410b965",
        "x-app-id": "ff571cbd",
        "x-app-key": "f4112a83315f79c5cdff346b54f08998",
        "x-remote-user-id": "0",
@@ -50,9 +54,9 @@ function nutritionCallFromServer(){
    }
    $.ajax(options);
 }
-
-
-
+/**
+ * @param  {object}
+ */
 function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty);
    $(".unit").text(foodObj.serving_unit);

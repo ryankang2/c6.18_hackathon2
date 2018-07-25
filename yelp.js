@@ -8,7 +8,6 @@
 * @return {list of resturants}
 * Function that pulls yelp API with keyword/address search and current location (city)
 */
-
 function requestYelpData (name, address, city) {
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
     let key = {
@@ -35,7 +34,10 @@ function requestYelpData (name, address, city) {
     }
     $.ajax(yelpAPI)
 }
-
+/**
+ * @param  {id}
+ * Using business id to search for more detail on business
+ */
 function getYelpDetails (id) {
     let customUrl = "https://yelp.ongandy.com/businesses/details";
     let key = {
@@ -60,7 +62,6 @@ function getYelpDetails (id) {
  * Function the displays the data to dom dynamically
  */
 function createYelpDisplay(response) {
-    console.log("Dive Into This Object ---->   ",response);
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
