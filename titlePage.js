@@ -38,15 +38,14 @@ $(function() {
 });
 
 /**
- * @param  {}
- * @param  {}
+ * Applies click handler to the submit button
  */
 function addClickHandler () {
     $(".submit").click(submitClicked);
 }
 
 /**
- * @param  {}
+ * Once user presses submit, get input and change page
  */
 function submitClicked () {
     retrieveInput();

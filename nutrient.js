@@ -1,8 +1,11 @@
 $(document).ready(initializeApp);
 
 var food = sessionStorage.getItem("setFood");
-console.log("food Item: ", food);
 
+/**
+ * Once DOM is ready, get nutrition from server and add animations
+ * to submit and reset button
+ */
 function initializeApp(){
     $(".submit").addClass("scale-in");
     $("#reset").addClass("scale-in");
@@ -11,26 +14,24 @@ function initializeApp(){
 
 
 function nutritionCallFromServer(){
-    console.log("called");
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-       "x-app-id": "0657689d",
-       "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-app-id": "aade7b14",
+       "x-app-key": "1113d90b4e2c7c93807a9d95916321c4",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
    }
    let options = {
        dataType: 'json',
-       url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
+       url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
        headers: dataForServer,
        data: {
            'query': userQuery
        },
        method: 'post',
        success: function(response) {
-           console.log(response);
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
            
@@ -38,12 +39,16 @@ function nutritionCallFromServer(){
            storeNutritionToDOM(response.foods[0])
        },
        error: function(error){
-           console.log('error: ', error);
-           return false;
+           if (error.statusText === "Not Found") {
+               alert("Couldn't find " + food + "! Press Ok to go back to home screen");
+               location.assign("index.html");
+               sessionStorage("setFood", "");
+           }
        }
    }
    $.ajax(options);
 }
+
 
 
 function storeNutritionToDOM (foodObj) {

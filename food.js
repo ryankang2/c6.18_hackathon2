@@ -1,3 +1,4 @@
+$(document).ready(initializeApp);
 
 var infoWindow;
 
@@ -7,14 +8,14 @@ var origin = {lat: 33.6348676, lng: -117.7405317};
 $(document).ready(initializeApp);
 
 let foodName = sessionStorage.getItem("setFood");
+var map;
+let previousInfoWindow = false;
+let previousRoute = false;
 
 function initializeApp() {
   applyClickHandler();
 }
 
-var map;
-let previousInfoWindow = false;
-let previousRoute = false;
 
 /**
  * Make a function applyClickHandlers 
@@ -32,8 +33,6 @@ function applyClickHandler(){
   $("#findMore").click(showMap);
   $("#reset").click(startOver);
   $("#logo").click(startOver);
-  // need fix for foodname display
-  $(".foodName").text(foodName);
   $("#pac-input").hide();
   $('#goThere').click(function(){
         $('#displayDirection').modal('show');
@@ -134,9 +133,7 @@ function initAutocomplete() {
 
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
-            console.log(place);
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
                 return;
             }
             var icon = {
@@ -162,12 +159,10 @@ function initAutocomplete() {
 
             markerLocation.addListener('click', function() {
                 previousInfoWindow.close();
-                console.log( "PLACE:  " ,place )
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
-                console.log(arrayOfString);
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
                 const name = place.name;
@@ -176,7 +171,6 @@ function initAutocomplete() {
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
             });
-
             // Create a marker for each place.
             markers.push(markerLocation);
 
@@ -231,7 +225,6 @@ function computeTotalDistance(result) {
 
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
-    console.log(arrayOfString);
 }
 
 /**
@@ -239,7 +232,6 @@ function populateAddressInfo( string ) {
  * back to first screen
  */
 function startOver(){ 
-    console.log("start over");
     location.assign("index.html");
     sessionStorage("setFood", "");
 }
