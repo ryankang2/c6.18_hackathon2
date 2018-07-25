@@ -18,7 +18,7 @@ function requestYelpData (name, address, city) {
         city: city,
         state: "CA",
         country: "US",
-      }
+    }
     let yelpAPI = {
         data: key,
         url: customUrl,
@@ -79,4 +79,5 @@ function createYelpDisplay(response) {
     } else {
         $('.openOrClosed').text("CLOSED").css('color','red');
     }
+    $("#goThere").addClass("scale-in");
 }

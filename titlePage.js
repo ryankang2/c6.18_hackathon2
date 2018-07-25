@@ -38,15 +38,21 @@ $(function() {
 });
 
 /**
- * @param  {}
- * @param  {}
+ * Applies click handler to the submit button
  */
 function addClickHandler () {
     $(".submit").click(submitClicked);
+    //when enter is pressed
+    $(document).keyup(function(event) {
+        if ($("#food").is(":focus") && event.key == "Enter") {
+            foodInput = $("#food");
+            changePage();
+        }
+    });
 }
 
 /**
- * @param  {}
+ * Once user presses submit, get input and change page
  */
 function submitClicked () {
     retrieveInput();
@@ -69,4 +75,6 @@ function retrieveInput () {
     foodInput = $("#food").val();
     var food = sessionStorage;
     food.setFood = foodInput;
+
+
 }

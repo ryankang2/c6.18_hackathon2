@@ -9,7 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <!--added these three for modal to work-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <script
+              src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+              integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+              crossorigin="anonymous"></script>
+      <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
       <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
@@ -20,10 +24,11 @@
     <script src = "nutrient.js"></script>
   </head>
   <body>
-
     <div class="container">
       <div class="nav-wrapper orange">
         <img id="logo" src="img/turtle_burger.png">
+        <div id="nameTitle"> Steady Eats </div>
+        <div class=foodName></div>
         <form id="searchBar">
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         </form>
@@ -31,18 +36,14 @@
       <div class="row">
 
         <div class="col s7">
-          <div class=foodName> Food </div>
           <div id="mapAndPic">
             <div id="pic"></div>
             <div id="map"></div>
           </div>
           <div id="question">
-
-          <button class="submit btn green center-align scale-transition scale-out" id="findMore">I want this!</button>  
-          <button class="submit btn center-align scale-transition scale-out" id="reset">Start Over</button>
-            //need to hide until click the pin
-          <button class="btn green center-align" id="goThere">Get me there!</button>
-
+          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="findMore">I want this!</button>  
+          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="reset">Start Over</button>
+          <button class="btn right-align scale-transition scale-out waves-effect waves-light" id="goThere">Get me there!</button>
           </div>
         </div>
   
@@ -78,9 +79,9 @@
             </div>
             <div class = "yelp container">
                 <div class="row">
-                  <div class="yelpImage">
+                  <!-- <div class="yelpImage"> -->
                     <img id="yelpImage" src="img/turtle_pizza.jpg">
-                  </div>
+                  <!-- </div> -->
                   <div class="yelpTitle nav-wrapper orange">
                     <div class="name"></div>
                     <div class="reviews"></div>
@@ -96,25 +97,19 @@
         </div>
       </div>
     </div>
-
-    <!--direction modal-->
-    <div class="modal fade" id="displayDirection" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Direction</h5>
-                </div>
-                <div class="modal-body">
-                    <div id="direction">
-                        <!-- direction goes here created by food.js -->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p>Thank you.</p>
-                </div>
+    
+  <div id="directionModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-message">
+            <div id="direction">
+                <!--direction got from google displays here-->
             </div>
         </div>
     </div>
+    <div class="modal-footer">
+        <button class="okBtn"><span>OK</span></button>
+    </div>
+  </div>
 
    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD08VLkun5YCMQytEJFegXC0W70ODQkf-Y&libraries=places&callback=initAutocomplete"></script>
   </body>

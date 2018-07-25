@@ -1,20 +1,19 @@
+$(document).ready(initializeApp);
 
 let infoWindow;
-
 
 let origin = {lat: 33.6348676, lng: -117.7405317};
 
 $(document).ready(initializeApp);
 
 let foodName = sessionStorage.getItem("setFood");
+let map;
+let previousInfoWindow = false;
+let previousRoute = false;
 
 function initializeApp() {
   applyClickHandler();
 }
-
-let map;
-let previousInfoWindow = false;
-let previousRoute = false;
 
 /**
  * Make a function applyClickHandlers 
@@ -32,12 +31,24 @@ function applyClickHandler(){
   $("#findMore").click(showMap);
   $("#reset").click(startOver);
   $("#logo").click(startOver);
-  // need fix for foodname display
-  $(".foodName").text(foodName);
   $("#pac-input").hide();
-  $('#goThere').click(function(){
-        $('#displayDirection').modal('show');
-  });
+  modalActivity();
+}
+
+function modalActivity(){
+    debugger;
+    var modal = document.getElementById('directionModal');
+    $('#goThere').click(function(){
+        $('.modal').show();
+    });
+    $('.okBtn').click(function(){
+        $('.modal').hide();
+    });
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            $('.modal').hide();
+        }
+    }
 }
 
 
@@ -75,6 +86,7 @@ function showMap(){
   $("#pac-input").val(foodInput);
   setTimeout(submitFormData, 1000);
 }
+
 /**
  * Make a function that creats a new google map attached to the div with the 
  * id of map, cet the center to the origin, zoom to 13, and mapTypeId to roadmap.
@@ -89,6 +101,7 @@ function initAutocomplete() {
 
     infoWindow = new google.maps.InfoWindow;
 
+    //this is gives us the current location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             const pos = {
@@ -121,6 +134,7 @@ function initAutocomplete() {
     });
 
     let markers = [];
+
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
@@ -138,7 +152,6 @@ function initAutocomplete() {
         let bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
                 return;
             }
             // var icon = {
@@ -177,7 +190,6 @@ function initAutocomplete() {
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
             });
-
             // Create a marker for each place.
             markers.push(markerLocation);
 
@@ -191,9 +203,31 @@ function initAutocomplete() {
     });
 }
 
+/**
+ *
+ * @param browserHasGeolocation
+ * @param infoWindow
+ * @param pos
+ * this function is called when not able to find the location
+ */
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}
+
+/**
+ *
+ * @param origin
+ * @param destination
+ * this function display the route on the map
+ */
 function displayRoute(origin, destination) {
     let service = new google.maps.DirectionsService;
     let display = new google.maps.DirectionsRenderer({
+
         draggable: true,
         map: map,
         panel: document.getElementById('direction')
@@ -208,8 +242,10 @@ function displayRoute(origin, destination) {
       
         if (status === 'OK') {
             if (previousRoute){
+                //here we set previous route to null so it clears the previous route
                 previousRoute.setMap(null);
             }
+            // saved reference of the previous route so we could erase from the map when new destination is clicked
             previousRoute = display;
             display.setDirections(response);
         } else {
@@ -218,6 +254,10 @@ function displayRoute(origin, destination) {
     });
 }
 
+/**
+ * this function calculates the distance of two points
+ * @param result
+ */
 function computeTotalDistance(result) {
     let total = 0;
     let myroute = result.routes[0];
@@ -225,6 +265,7 @@ function computeTotalDistance(result) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
+    // it displays in km, in future we will converting to miles
     document.getElementById('total').innerHTML = total + ' km';
 }
 
@@ -234,7 +275,6 @@ function computeTotalDistance(result) {
  * back to first screen
  */
 function startOver(){ 
-    console.log("start over");
     location.assign("index.html");
     sessionStorage("setFood", "");
 }
