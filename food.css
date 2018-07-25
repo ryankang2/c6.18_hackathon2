@@ -31,7 +31,12 @@ table{
    height: 100%;
 }
 
+.orange{
+  position: relative
+}
+
 #logo {
+  display: inline-block;
   width: 5%;
 }
 
@@ -39,13 +44,23 @@ table{
   cursor: pointer;
 }
 
-.nav-wrapper {
-  border: 2px solid black;
+
+#nameTitle{
+    display: inline;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(5, 129, 5);
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .foodName {
   font-size: 3em;
 }
+/* .nav-wrapper {
+  border: 2px solid black;
+} */
 
 #mapAndPic {
   width: 100%;
@@ -140,10 +155,6 @@ table{
   width: 90%;
 }
 
-.yelpImage img {
-  width: 100%;
-  position: relative;
-}
 
 #map {
   height: 50vh;
@@ -152,6 +163,7 @@ table{
 #yelpImage {
   height:100%;
   width: 100%;
+  font-size:0;
 }
 
 .yelp > div {
@@ -162,10 +174,13 @@ table{
 .yelpTitle {
   font-weight: bold;
   border: 1.2px solid black;
+  position: relative;
+  bottom:0.75vw;
 }
 
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
+  padding-bottom: 3%;
 }
 
 .modal {

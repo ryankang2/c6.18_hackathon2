@@ -18,7 +18,7 @@ function requestYelpData (name, address, city) {
         city: city,
         state: "CA",
         country: "US",
-      }
+    }
     let yelpAPI = {
         data: key,
         url: customUrl,

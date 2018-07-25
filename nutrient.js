@@ -1,8 +1,11 @@
 $(document).ready(initializeApp);
 
 var food = sessionStorage.getItem("setFood");
-console.log("food Item: ", food);
 
+/**
+ * Once DOM is ready, get nutrition from server and add animations
+ * to submit and reset button
+ */
 function initializeApp(){
     $(".submit").addClass("scale-in");
     $("#reset").addClass("scale-in");
@@ -11,7 +14,6 @@ function initializeApp(){
 
 
 function nutritionCallFromServer(){
-    console.log("called");
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
@@ -32,7 +34,6 @@ function nutritionCallFromServer(){
        },
        method: 'post',
        success: function(response) {
-           console.log(response);
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
            
@@ -40,12 +41,16 @@ function nutritionCallFromServer(){
            storeNutritionToDOM(response.foods[0])
        },
        error: function(error){
-           console.log('error: ', error);
-           return false;
+           if (error.statusText === "Not Found") {
+               alert("Couldn't find " + food + "! Press Ok to go back to home screen");
+               location.assign("index.html");
+               sessionStorage("setFood", "");
+           }
        }
    }
    $.ajax(options);
 }
+
 
 
 function storeNutritionToDOM (foodObj) {
