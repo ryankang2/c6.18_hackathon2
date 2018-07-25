@@ -112,7 +112,6 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
-                if( previousInfoWindow)
                 previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
                 debugger;
@@ -159,10 +158,7 @@ function displayRoute(origin, destination) {
         travelMode: 'DRIVING',
         avoidTolls: true
     }, function(response, status) {
-        if(previousRoute) {
-            directionsDisplay.setDirections({routes: []});
-            previousRoute = false;
-        }
+      
         if (status === 'OK') {
             display.setDirections(response);
             previousRoute = true;
