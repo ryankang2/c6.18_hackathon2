@@ -59,7 +59,7 @@ table{
 
 .nutritionTitles {
   display: inline-block;
-  width: 100%
+  width: 100%;
 }
 
 #map{
@@ -77,8 +77,8 @@ table{
   outline: none;
   color: #fff;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 5px #999;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
 }
 
 #findMore:hover {
@@ -97,6 +97,10 @@ table{
 
 .nutrition > div {
   border: 2px solid black;
+}
+
+.nutrition > div:nth-child(1) {
+  font-weight: bold;
 }
 
 .nutritionTitles > div {
@@ -124,5 +128,13 @@ table{
 .yelp > div {
   border: 2px solid black;
   margin-top: 10%;
+}
 
+.yelpTitle {
+  font-weight: bold;
+  border: 1.2px solid black;
+}
+
+.yelpTitle, .yelpInfo {
+  padding-left: 2%;
 }
