@@ -4,7 +4,7 @@ var food = sessionStorage.getItem("setFood");
 console.log("food Item: ", food);
 
 function initializeApp(){
-//    nutritionCallFromServer();
+    //nutritionCallFromServer();
 }
 
 
@@ -64,13 +64,7 @@ function nutritionCallFromServer(){
            console.log(response);
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
-           img.css({
-            // "height": "100%",
-            //  "width": "100%",
-            //  "position": "relative"
-            })
            $('#pic').append(img);
-          
            storeNutritionToDOM(response.foods[0])
        },
        error: function(){

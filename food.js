@@ -16,11 +16,14 @@ var map;
 let previousInfoWindow = false;
 let previousRoute = false;
 
+let foodName = sessionStorage.getItem("setFood");
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  // need fix for foodname display
+  $(".foodName").text(foodName);
   $("#pac-input").hide();
 }
 
