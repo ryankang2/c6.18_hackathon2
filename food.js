@@ -10,7 +10,6 @@ let foodName = sessionStorage.getItem("setFood");
 
 function initializeApp() {
   applyClickHandler();
- 
 }
 
 var map;
@@ -27,9 +26,24 @@ function applyClickHandler(){
   // need fix for foodname display
   $(".foodName").text(foodName);
   $("#pac-input").hide();
-  $('#goThere').click(function(){
-        $('#displayDirection').modal('show');
-  });
+  debugger;
+  modalActivity();
+}
+
+function modalActivity(){
+    debugger;
+    var modal = document.getElementById('directionModal');
+    $('#goThere').click(function(){
+        $('.modal').show();
+    });
+    $('.okBtn').click(function(){
+        $('.modal').hide();
+    });
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            $('.modal').hide();
+        }
+    }
 }
 
 function submitFormData () {
@@ -51,7 +65,6 @@ function submitFormData () {
 function showMap(){
   $("#pic").hide();
   $("#map").show();
-  $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
   setTimeout(submitFormData, 5000);
@@ -144,7 +157,7 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
-                previousInfoWindow.close();
+                //previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
                 debugger;
                 infoWindow.open(map, markerLocation);

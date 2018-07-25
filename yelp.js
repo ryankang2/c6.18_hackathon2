@@ -61,7 +61,6 @@ function getYelpDetails (id) {
  */
 function createYelpDisplay(response) {
     console.log("Dive Into This Object ---->   ",response);
-    debugger;
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
@@ -82,4 +81,5 @@ function createYelpDisplay(response) {
     } else {
         $('.openOrClosed').text("CLOSED").css('color','red');
     }
+    $("#goThere").addClass("scale-in");
 }
