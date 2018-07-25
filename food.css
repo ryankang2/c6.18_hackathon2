@@ -173,14 +173,6 @@ table{
   z-index: 1;
 }
 
-.adp-placemark, {
+.adp table {
   width: 100%;
-}
-
-.adp {
-  width: 100%;
-}
-
-tbody {
-  color: black;
 }

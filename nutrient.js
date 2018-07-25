@@ -15,15 +15,17 @@ function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-       "x-app-id": "0657689d",
-       "x-app-key": "1c577a065dc2109313e314fdb410b965",
+    // "x-app-id": "0657689d",
+    // "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-app-id": "ff571cbd",
+       "x-app-key": "f4112a83315f79c5cdff346b54f08998",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
    }
    let options = {
        dataType: 'json',
-       url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
+       url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
        headers: dataForServer,
        data: {
            'query': userQuery
