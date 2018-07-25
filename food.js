@@ -27,6 +27,9 @@ function applyClickHandler(){
   // need fix for foodname display
   $(".foodName").text(foodName);
   $("#pac-input").hide();
+  $('#goThere').click(function(){
+        $('#displayDirection').modal('show');
+  });
 }
 
 function submitFormData () {
@@ -172,14 +175,14 @@ function initAutocomplete() {
     });
 }
 
-
 function displayRoute(origin, destination) {
     var service = new google.maps.DirectionsService;
     var display = new google.maps.DirectionsRenderer({
         draggable: true,
         map: map,
-        panel: document.getElementById('right-panel')
+        panel: document.getElementById('direction')
     });
+
     service.route({
         origin: origin,
         destination: destination,
@@ -189,9 +192,11 @@ function displayRoute(origin, destination) {
     }, function(response, status) {
       
         if (status === 'OK') {
+            if (previousRoute){
+                previousRoute.setMap(null);
+            }
+            previousRoute = display;
             display.setDirections(response);
-            previousRoute = true;
-
         } else {
             alert('Could not display directions due to: ' + status);
         }
