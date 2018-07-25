@@ -2,11 +2,13 @@ var infoWindow;
 
 $(document).ready(applyClickHandler);
 
+let foodName = sessionStorage.getItem("setFood");
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  $(".foodName").text(foodName);
 }
 
 function showMap(){
