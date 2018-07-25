@@ -6,7 +6,7 @@ var origin = {lat: 33.8688, lng: -117.2195};
 
 $(document).ready(initializeApp);
 
-let foodInput = null;
+let foodName = sessionStorage.getItem("setFood");
 
 function initializeApp() {
   applyClickHandler();
@@ -16,12 +16,13 @@ var map;
 let previousInfoWindow = false;
 let previousRoute = false;
 
-let foodName = sessionStorage.getItem("setFood");
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  $("#reset").click(startOver);
+  $("#logo").click(startOver);
   // need fix for foodname display
   $(".foodName").text(foodName);
   $("#pac-input").hide();
@@ -36,8 +37,7 @@ function showMap(){
   $("#pic").hide();
   $("#map").show();
   $("#pac-input").show();
-  foodInput = sessionStorage.getItem("setFood");
-  $("#pac-input").val(foodInput);
+  $("#pac-input").val(foodName);
 
 }
 
@@ -197,5 +197,14 @@ function computeTotalDistance(result) {
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
     console.log(arrayOfString);
-    let address
+}
+
+/**
+ * callback function. when user presses start over button or logo button, go
+ * back to first screen
+ */
+function startOver(){ 
+    console.log("start over");
+    location.assign("index.html");
+    sessionStorage("setFood", "");
 }
