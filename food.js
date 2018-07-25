@@ -1,6 +1,24 @@
 var infoWindow;
+
 var origin = {lat: -33.8688, lng: 151.2195};
 var map;
+
+
+$(document).ready(applyClickHandler);
+
+/**
+ * Apply click handler to FindMore button
+ */
+function applyClickHandler(){
+  $("#findMore").click(showMap);
+}
+
+function showMap(){
+  $("#pic").hide();
+  $("#map").show();
+}
+
+
 
 function initAutocomplete() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -21,7 +39,7 @@ function initAutocomplete() {
             // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            infoWindow.setContent('You are Here');
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
@@ -58,7 +76,8 @@ function initAutocomplete() {
         });
         markers = [];
 
-        // For each place, get the icon, name and location.
+        // For each place, get the 
+
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             console.log(place);
@@ -70,23 +89,37 @@ function initAutocomplete() {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
                 origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
+                anchor: new google.maps.Point(17, 34),// 17 34
                 scaledSize: new google.maps.Size(25, 25)
             };
 
             var infoWindow = new google.maps.InfoWindow({
-                content: `${place.name} <br> Address: ${place.formatted_address}<br> Rating: ${place.rating} `,
+                content: `${place.name} <br> Rating: ${place.rating} `,
+                pixelOffset: new google.maps.Size(0, 0)
             });
 
             var markerLocation = new google.maps.Marker({
                 map: map,
-                icon: icon,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
                 title: place.name,
                 position: place.geometry.location
             });
 
             markerLocation.addListener('click', function() {
+                console.log( "PLACE:  " ,place )
+                debugger;
                 infoWindow.open(map, markerLocation);
+                // break the address up into street address , cit
+                const arrayOfString = place.formatted_address.split(',');
+                console.log(arrayOfString);
+                const address = arrayOfString[0];
+                const cityName = arrayOfString[1];
+                const name = place.name;
+                // send sudip lat and long
+                
+                requestYelpData(name , address, cityName);
+                displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
+                testClick(place.formatted_address);
             });
 
             // Create a marker for each place.
@@ -102,6 +135,7 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+
 
 function displayRoute(origin, destination) {
     var service = new google.maps.DirectionsService;
@@ -133,5 +167,40 @@ function computeTotalDistance(result) {
     }
     total = total / 1000;
     document.getElementById('total').innerHTML = total + ' km';
+}
+
+
+function populateAddressInfo( string ) {
+    const arrayOfString = string.split(',');
+    console.log(arrayOfString);
+    let address
+
+
+}
+
+function testClick(addr){
+    console.log('From test click:', addr);
+}
+
+function requestYelpData (keywordOrAddress = irvine,) {
+    debugger;
+    let key = {
+        api_key: "XSyryzoREYThrY1P0pDAkbK9uJV0j7TVklsKegO9g9aqqqGz87SZPuhQ0Cob0jzZ6G1BCVE9JaycPHyB2OI7hXgTJYs_enS7SKr1G21Jf45cDBYbUAHOFnh-r3FWW3Yx",
+        term: keywordOrAddress,
+        //location: location
+    }
+    let yelpAPI = {
+        data: key,
+        url: "https://yelp.ongandy.com/businesses",
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log(response)
+        },
+        error: function () {
+            console.log("fail")
+        }
+    }
+    $.ajax(yelpAPI)
 }
 

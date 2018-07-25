@@ -1,3 +1,4 @@
+
        #map {
         height: 60%;
         width:60%;
@@ -104,6 +105,28 @@ table{
    float: right;
    width: 34%;
    height: 100%;
+
+* {
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
+#logo {
+  width: 5%;
+}
 
+.nutritionTitles {
+  display: inline-block;
+  width: 70%
+
+}
+
+.nutritionValue {
+  display: inline-block;
+  width: 25%;
+  text-align: right;
+}
+
+#map {
+  height: 50vh;
+}

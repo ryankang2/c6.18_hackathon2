@@ -1,11 +1,15 @@
 $(document).ready(initializeApp);
 
+var food = sessionStorage.getItem("setFood");
+console.log("food Item: ", food);
+
+
 function initializeApp(){
     $('#foodBtn').click(nutritionCallFromServer);
 }
 
 function nutritionCallFromServer(){
-    let userQuery = $('#foodInput').val();
+    let userQuery = food;
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-app-id": "0657689d",
@@ -28,13 +32,18 @@ function nutritionCallFromServer(){
             let src = response.foods[0].photo.highres;
             let img = $('<img>').attr('src', src);
             $('.test').append(img);
-
             let servingQuantity = response.foods[0].serving_qty;
             let servingWeight = response.foods[0].serving_weight_grams;
             let calories = response.foods[0].nf_calories;
             let totalFat = response.foods[0].nf_total_fat;
             let sugars = response.foods[0].nf_sugars;
             let protein = response.foods[0].nf_protein;
+            img.css({
+                "height": "100%",
+                 "width": "100%"
+            })
+            $('#pic').html(img);
+
         },
         error: function(){
             console.log('error');
