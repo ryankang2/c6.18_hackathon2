@@ -11,6 +11,12 @@ function initializeApp() {
 
 }
 
+var origin = {lat: -33.8688, lng: 151.2195};
+var map;
+
+
+$(document).ready(applyClickHandler);
+
 /**
  * Apply click handler to FindMore button
  */
@@ -24,9 +30,9 @@ function showMap(){
 
 }
 
+
 function initAutocomplete() {
-    var origin = {lat: -33.8688, lng: 151.2195};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: origin,
         zoom: 13,
         mapTypeId: 'roadmap'
@@ -79,7 +85,8 @@ function initAutocomplete() {
         });
         markers = [];
 
-        // For each place, get the name and location.
+        // For each place, get the 
+
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             console.log(place);
@@ -108,9 +115,20 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
+                console.log( "PLACE:  " ,place )
+                debugger;
                 infoWindow.open(map, markerLocation);
-                // testClick(place.formatted_address);
-                testClick(place);
+                // break the address up into street address , cit
+                const arrayOfString = place.formatted_address.split(',');
+                console.log(arrayOfString);
+                const address = arrayOfString[0];
+                const cityName = arrayOfString[1];
+                const name = place.name;
+                // send sudip lat and long
+                
+                requestYelpData(name , address, cityName);
+                displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
+                testClick(place.formatted_address);
             });
 
             // Create a marker for each place.
@@ -127,9 +145,107 @@ function initAutocomplete() {
     });
 }
 
-//assign global variable placeObj to place we clicked (pass to yelp api)
+
+function displayRoute(origin, destination) {
+    var service = new google.maps.DirectionsService;
+    var display = new google.maps.DirectionsRenderer({
+        draggable: true,
+        map: map,
+        panel: document.getElementById('right-panel')
+    });
+    service.route({
+        origin: origin,
+        destination: destination,
+        // waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
+        travelMode: 'DRIVING',
+        avoidTolls: true
+    }, function(response, status) {
+        if (status === 'OK') {
+            display.setDirections(response);
+        } else {
+            alert('Could not display directions due to: ' + status);
+        }
+    });
+}
+
+function computeTotalDistance(result) {
+    var total = 0;
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+        total += myroute.legs[i].distance.value;
+    }
+    total = total / 1000;
+    document.getElementById('total').innerHTML = total + ' km';
+}
+
+
+function populateAddressInfo( string ) {
+    const arrayOfString = string.split(',');
+    console.log(arrayOfString);
+    let address
+
+
+}
+
 function testClick(addr){
     console.log('From test click:', addr);
     placeObj = addr;
 
 }
+
+// function requestYelpData (keywordOrAddress = irvine,) {
+//     debugger;
+//     let key = {
+//         api_key: "XSyryzoREYThrY1P0pDAkbK9uJV0j7TVklsKegO9g9aqqqGz87SZPuhQ0Cob0jzZ6G1BCVE9JaycPHyB2OI7hXgTJYs_enS7SKr1G21Jf45cDBYbUAHOFnh-r3FWW3Yx",
+//         term: keywordOrAddress,
+//         //location: location
+//     }
+//     let yelpAPI = {
+//         data: key,
+//         url: "https://yelp.ongandy.com/businesses",
+//         method: "POST",
+//         dataType: "json",
+//         success: function (response) {
+//             console.log(response)
+//         },
+//         error: function () {
+//             console.log("fail")
+//         }
+//     }
+//     $.ajax(yelpAPI)
+// }
+
+/**
+ * @param  {keywordOfAddress, location}
+ * @return {list of resturants}
+ * Function that pulls yelp API with keyword/address search and current location (city)
+ */
+
+function requestYelpData (name, address, city) {
+    let customUrl = "https://yelp.ongandy.com/businesses/matches";
+    let key = {
+        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
+        name: name,
+        address1: address,
+        city: city,
+        state: "CA",
+        country: "US",
+      }
+    let yelpAPI = {
+        data: key,
+        url: customUrl,
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log("Success:    ", response);
+            var businessId= response.businesses[0].id;
+            getYelpDetails(businessId);
+        },
+        error: function () {
+            console.log("fail")
+        }
+
+    }
+    $.ajax(yelpAPI)
+}
+

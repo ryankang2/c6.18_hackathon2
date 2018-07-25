@@ -1,18 +1,19 @@
 $(document).ready(initializeApp);
 
-let food = sessionStorage.getItem("setFood");
+var food = sessionStorage.getItem("setFood");
+console.log("food Item: ", food);
 
 
 function initializeApp(){
-    // nutritionCallFromServer();
+    $('#foodBtn').click(nutritionCallFromServer);
 }
 
 function nutritionCallFromServer(){
     let userQuery = food;
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-app-id": "ff571cbd",
-        "x-app-key": "f4112a83315f79c5cdff346b54f08998",
+        "x-app-id": "0657689d",
+        "x-app-key": "1c577a065dc2109313e314fdb410b965",
         "x-remote-user-id": "0",
         "Cache-Control": "no-cache",
         "query": 'apple',
@@ -30,11 +31,19 @@ function nutritionCallFromServer(){
             console.log(response);
             let src = response.foods[0].photo.highres;
             let img = $('<img>').attr('src', src);
+            $('.test').append(img);
+            let servingQuantity = response.foods[0].serving_qty;
+            let servingWeight = response.foods[0].serving_weight_grams;
+            let calories = response.foods[0].nf_calories;
+            let totalFat = response.foods[0].nf_total_fat;
+            let sugars = response.foods[0].nf_sugars;
+            let protein = response.foods[0].nf_protein;
             img.css({
                 "height": "100%",
                  "width": "100%"
             })
             $('#pic').html(img);
+
         },
         error: function(){
             console.log('error');
