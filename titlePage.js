@@ -33,5 +33,4 @@ function retrieveInput () {
     foodInput = $("#food").val();
     var food = sessionStorage;
     food.setFood = foodInput;
-    console.log("food input: ", foodInput); 
 }

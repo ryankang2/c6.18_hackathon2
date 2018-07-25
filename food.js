@@ -1,28 +1,39 @@
 
 var infoWindow;
 
+
 var origin = {lat: 33.8688, lng: -117.2195};
+
+$(document).ready(initializeApp);
+
+let foodInput = null;
+
+function initializeApp() {
+  applyClickHandler();
+}
+
 var map;
 let previousInfoWindow = false;
 let previousRoute = false;
-
-
-
-
-$(document).ready(applyClickHandler);
 
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  $("#pac-input").hide();
 }
 
+/**
+ * if user clicks button, hide the picture and show the map
+ */
 function showMap(){
   $("#pic").hide();
   $("#map").show();
+  $("#pac-input").show();
+  foodInput = sessionStorage.getItem("setFood");
+  $("#pac-input").val(foodInput);
 }
-
 
 
 function initAutocomplete() {
@@ -40,8 +51,6 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are Here');
@@ -179,31 +188,9 @@ function computeTotalDistance(result) {
     document.getElementById('total').innerHTML = total + ' km';
 }
 
-// function requestYelpData (name, address, city) {
-//     let customUrl = "https://yelp.ongandy.com/businesses/matches";
-//     let key = {
-//         api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
-//         name: name,
-//         address1: address,
-//         city: city,
-//         state: "CA",
-//         country: "US",
-//       }
-//     let yelpAPI = {
-//         data: key,
-//         url: customUrl,
-//         method: "POST",
-//         dataType: "json",
-//         success: function (response) {
-//             console.log(response);
-//             var businessId= response.businesses[0].id;
-//             getYelpDetails(businessId);
-//         },
-//         error: function () {
-//             console.log("fail")
-//         }
-
-//     }
-//     $.ajax(yelpAPI)
-// }
+function populateAddressInfo( string ) {
+    const arrayOfString = string.split(',');
+    console.log(arrayOfString);
+    let address
+}
 
