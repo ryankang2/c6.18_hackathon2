@@ -26,7 +26,7 @@ function requestYelpData (name, address, city) {
        dataType: "json",
        success: function (response) {
            console.log(response);
-           var businessId= response.businesses[0].id;
+           var businessId = response.businesses[0].id;
            getYelpDetails(businessId);
        },
        error: function () {
@@ -68,7 +68,7 @@ function createYelpDisplay(response) {
     let price = response.price;
     let reviewCount = response.review_count;
     let rating = response.rating;
-    $('.reviews').text( ` ${price} , ${reviewCount} reviews, ${rating}/5 Stars`)
+    $('.reviews').text( ` ${price}, ${reviewCount} reviews, ${rating}/5 Stars`)
     let type = response.categories[0].title;
     $('.type').text(type);
     let displayAddress = response.location.display_address[0];

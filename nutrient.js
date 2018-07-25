@@ -11,8 +11,8 @@ function nutritionCallFromServer(){
    let userQuery = food;
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-       "x-app-id": "0657689d",
-       "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-app-id": "439bb275",
+       "x-app-key": "3d3fca4b72a835f7ba2e0becf9db9ddf",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
@@ -30,10 +30,12 @@ function nutritionCallFromServer(){
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
            img.css({
-               "height": "100%",
-                "width": "100%"
-           })
-           $('#pic').html(img);
+            // "height": "100%",
+            //  "width": "100%",
+            //  "position": "relative"
+            })
+           $('#pic').append(img);
+          
            storeNutritionToDOM(response.foods[0])
        },
        error: function(){
