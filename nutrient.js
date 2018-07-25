@@ -4,7 +4,7 @@ var food = sessionStorage.getItem("setFood");
 console.log("food Item: ", food);
 
 function initializeApp(){
-    nutritionCallFromServer();
+    $('#foodBtn').click(nutritionCallFromServer);
 }
 
 function nutritionCallFromServer(){
@@ -30,12 +30,21 @@ function nutritionCallFromServer(){
             console.log(response);
             let src = response.foods[0].photo.highres;
             let img = $('<img>').attr('src', src);
+            $('.test').append(img);
+            let servingQuantity = response.foods[0].serving_qty;
+            let servingWeight = response.foods[0].serving_weight_grams;
+            let calories = response.foods[0].nf_calories;
+            let totalFat = response.foods[0].nf_total_fat;
+            let sugars = response.foods[0].nf_sugars;
+            let protein = response.foods[0].nf_protein;
             img.css({
                 "height": "100%",
                  "width": "100%"
             })
             $('#pic').html(img);
+
             storeNutritionToDOM(response.foods[0])
+
         },
         error: function(){
             console.log('error');
