@@ -33,6 +33,23 @@ function applyClickHandler(){
   $("#reset").click(startOver);
   $("#logo").click(startOver);
   $("#pac-input").hide();
+  modalActivity();
+}
+
+function modalActivity(){
+    debugger;
+    var modal = document.getElementById('directionModal');
+    $('#goThere').click(function(){
+        $('.modal').show();
+    });
+    $('.okBtn').click(function(){
+        $('.modal').hide();
+    });
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            $('.modal').hide();
+        }
+    }
 }
 
 

@@ -55,13 +55,16 @@ table{
     font-weight: bold;
 }
 
+.foodName {
+  font-size: 3em;
+}
 /* .nav-wrapper {
   border: 2px solid black;
 } */
 
 #mapAndPic {
   width: 100%;
-  margin-top: 4%;
+  margin-top: 1%;
 }
 
 #pic img{
@@ -90,10 +93,6 @@ table{
 #findMore {
   display: inline-block;
   background-color: rgb(13, 179, 13);
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -101,38 +100,41 @@ table{
 }
 
 #findMore:hover {
-  background-color: rgb(36, 129, 13);
+  background-color: rgb(62, 197, 29);
 }
 
-#findMore:active {
-  background-color:rgb(18, 85, 5);
+#findMore:active, #reset:active, #goThere:active {
+  /* background-color:rgb(18, 85, 5); */
   box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  transform: translateY(3px);
 }
 
 #reset {
-  display: inline-block;
   background-color: red;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
   outline: none;
-  color: #fff;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 5px #999;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#goThere {
+  background-color: green;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#goThere:hover {
+  background-color: rgb(1, 102, 1);
 }
 
 #reset:hover {
   background-color: rgb(190, 28, 16);
 }
 
-#reset:active {
-  background-color:rgb(126, 15, 7);
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+#findMore:hover {
+  background-color: darkgreen;
 }
- 
+
 .nutritionTitles .right-align {
   float: right;
 }
@@ -179,4 +181,13 @@ table{
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
   padding-bottom: 3%;
+}
+
+.modal {
+  top: 10%;
+  z-index: 1;
+}
+
+.adp table {
+  width: 100%;
 }

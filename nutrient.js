@@ -17,8 +17,10 @@ function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-       "x-app-id": "aade7b14",
-       "x-app-key": "1113d90b4e2c7c93807a9d95916321c4",
+    // "x-app-id": "0657689d",
+    // "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-app-id": "ff571cbd",
+       "x-app-key": "f4112a83315f79c5cdff346b54f08998",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',

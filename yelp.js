@@ -81,4 +81,5 @@ function createYelpDisplay(response) {
     } else {
         $('.openOrClosed').text("CLOSED").css('color','red');
     }
+    $("#goThere").addClass("scale-in");
 }
