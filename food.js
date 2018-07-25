@@ -1,6 +1,15 @@
 
 var infoWindow;
 
+$(document).ready(initializeApp);
+
+let foodInput = null;
+
+function initializeApp() {
+  applyClickHandler();
+
+}
+
 var origin = {lat: -33.8688, lng: 151.2195};
 var map;
 
@@ -12,13 +21,19 @@ $(document).ready(applyClickHandler);
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  $("#pac-input").hide();
 }
 
+/**
+ * if user clicks button, hide the picture and show the map
+ */
 function showMap(){
   $("#pic").hide();
   $("#map").show();
+  $("#pac-input").show();
+  foodInput = sessionStorage.getItem("setFood");
+  $("#pac-input").val(foodInput);
 }
-
 
 
 function initAutocomplete() {
@@ -36,8 +51,6 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            // var clickHandler = new ClickEventHandler(map, pos);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are Here');
@@ -174,7 +187,11 @@ function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
     console.log(arrayOfString);
     let address
+}
 
+function testClick(addr){
+    console.log('From test click:', addr);
+    placeObj = addr;
 
 }
 
@@ -205,3 +222,38 @@ function populateAddressInfo( string ) {
 //     }
 //     $.ajax(yelpAPI)
 // }
+
+/**
+ * @param  {keywordOfAddress, location}
+ * @return {list of resturants}
+ * Function that pulls yelp API with keyword/address search and current location (city)
+ */
+
+function requestYelpData (name, address, city) {
+    let customUrl = "https://yelp.ongandy.com/businesses/matches";
+    let key = {
+        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
+        name: name,
+        address1: address,
+        city: city,
+        state: "CA",
+        country: "US",
+      }
+    let yelpAPI = {
+        data: key,
+        url: customUrl,
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log("Success:    ", response);
+            var businessId= response.businesses[0].id;
+            getYelpDetails(businessId);
+        },
+        error: function () {
+            console.log("fail")
+        }
+
+    }
+    $.ajax(yelpAPI)
+}
+

@@ -26,7 +26,6 @@ function nutritionCallFromServer(){
        },
        method: 'post',
        success: function(response) {
-           debugger;
            console.log(response);
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
@@ -46,6 +45,15 @@ function nutritionCallFromServer(){
 
 function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty);
+   $(".unit").text(foodObj.serving_unit);
+   $(".calories").text(foodObj.nf_calories + " kcal");
+   $(".carbohydrate").text(foodObj.nf_total_carbohydrate + " g");
+   $(".protein").text(foodObj.nf_protein + " g");
+   $(".fat").text(foodObj.nf_total_fat + " g");
+   $(".sugar").text(foodObj.nf_sugars + " g");
+   $(".sodium").text(foodObj.nf_sodium + " mg");
+   $(".cholesterol").text(foodObj.nf_cholesterol + " mg");
+   $(".serving").text(foodObj.serving_qty + " " + foodObj.serving_unit);
    $(".unit").text(foodObj.serving_unit);
    $(".calories").text(foodObj.nf_calories + " kcal");
    $(".carbohydrate").text(foodObj.nf_total_carbohydrate + " g");
