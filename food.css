@@ -153,10 +153,6 @@ table{
   width: 90%;
 }
 
-.yelpImage img {
-  width: 100%;
-  position: relative;
-}
 
 #map {
   height: 50vh;
@@ -165,6 +161,7 @@ table{
 #yelpImage {
   height:100%;
   width: 100%;
+  font-size:0;
 }
 
 .yelp > div {
@@ -175,28 +172,11 @@ table{
 .yelpTitle {
   font-weight: bold;
   border: 1.2px solid black;
+  position: relative;
+  bottom:0.75vw;
 }
 
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
+  padding-bottom: 3%;
 }
-
-.errorBackground{
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.errMsg{
-  height: 30%;
-  width: 40%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-}
-
