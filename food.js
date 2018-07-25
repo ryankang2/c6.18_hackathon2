@@ -1,8 +1,8 @@
 
-var infoWindow;
+let infoWindow;
 
 
-var origin = {lat: 33.6348676, lng: -117.7405317};
+let origin = {lat: 33.6348676, lng: -117.7405317};
 
 $(document).ready(initializeApp);
 
@@ -12,14 +12,14 @@ function initializeApp() {
   applyClickHandler();
 }
 
-var map;
+let map;
 let previousInfoWindow = false;
 let previousRoute = false;
 
 /**
  * Make a function applyClickHandlers 
- * params { none };
- * returns { none };
+ * @param { none };
+ * @returns { none };
  * 
  * Apply click handler to the button with the if of findMore that runs the startOver function
  * Apply click handler to reset button and logo that runs the startOver function
@@ -43,14 +43,14 @@ function applyClickHandler(){
 
 /**
  * Make a function to autosubmit the input data
- * params: { none };
- * return: { none };
+ * @param: { none };
+ * @return: { none };
  * Target the searchbar with the id pac-input
  * focus on 
  * Trigger the input equivalent to the enter button
  */
 function submitFormData () {
-    var input = document.getElementById('pac-input');
+    let input = document.getElementById('pac-input');
     try {
         google.maps.event.trigger( input, 'focus');
     } finally {
@@ -63,7 +63,10 @@ function submitFormData () {
  * Make a function that hides the picture with an id of pic, shows the map
  * with an id of map. Store the session storage variable as a variable called 
  * if user clicks button, hide the picture and show the map
- * fill the search bar with the 
+ * fill the search bar with the variabe foodInput
+ * set a timeout to submit the form data after a short delay 1 second
+ * @param: { none };
+ * @returns: { none };
  */
 function showMap(){
   $("#pic").hide();
@@ -72,7 +75,10 @@ function showMap(){
   $("#pac-input").val(foodInput);
   setTimeout(submitFormData, 1000);
 }
-
+/**
+ * Make a function that creats a new google map attached to the div with the 
+ * id of map, cet the center to the origin, zoom to 13, and mapTypeId to roadmap.
+ */
 
 function initAutocomplete() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -103,9 +109,9 @@ function initAutocomplete() {
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
+    // Create the search box and link it to the search bar element with the id of pac-input.
+    let input = document.getElementById('pac-input');
+    let searchBox = new google.maps.places.SearchBox(input);
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -114,46 +120,42 @@ function initAutocomplete() {
         searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
+    let markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
+      let places = searchBox.getPlaces();
 
         if (places.length == 0) {
             return;
         }
-
         // Clear out the old markers.
         markers.forEach(function(marker) {
             marker.setMap(null);
         });
         markers = [];
 
-        // For each place, get the 
-
-        var bounds = new google.maps.LatLngBounds();
+        let bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
-            console.log(place);
             if (!place.geometry) {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),// 17 34
-                scaledSize: new google.maps.Size(25, 25)
-            };
+            // var icon = {
+            //     url: place.icon,
+            //     size: new google.maps.Size(71, 71),
+            //     origin: new google.maps.Point(0, 0),
+            //     anchor: new google.maps.Point(17, 34),
+            //     scaledSize: new google.maps.Size(25, 25)
+            // };
 
-            var infoWindow = new google.maps.InfoWindow({
+            let infoWindow = new google.maps.InfoWindow({
                 content: `${place.name} <br> Rating: ${place.rating} `,
                 pixelOffset: new google.maps.Size(0, 0)
             });
            
 
-            var markerLocation = new google.maps.Marker({
+            let markerLocation = new google.maps.Marker({
                 map: map,
                 icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
                 title: place.name,
@@ -162,17 +164,16 @@ function initAutocomplete() {
 
             markerLocation.addListener('click', function() {
                 previousInfoWindow.close();
-                console.log( "PLACE:  " ,place )
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
-                console.log(arrayOfString);
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
                 const name = place.name;
-                // send sudip lat and long
                 
+                // send the relevant data to make the Yelp ajax call
+                // send the relevant info to Google Directions
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
             });
@@ -181,7 +182,6 @@ function initAutocomplete() {
             markers.push(markerLocation);
 
             if (place.geometry.viewport) {
-                // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
             } else {
                 bounds.extend(place.geometry.location);
@@ -192,8 +192,8 @@ function initAutocomplete() {
 }
 
 function displayRoute(origin, destination) {
-    var service = new google.maps.DirectionsService;
-    var display = new google.maps.DirectionsRenderer({
+    let service = new google.maps.DirectionsService;
+    let display = new google.maps.DirectionsRenderer({
         draggable: true,
         map: map,
         panel: document.getElementById('direction')
@@ -202,7 +202,6 @@ function displayRoute(origin, destination) {
     service.route({
         origin: origin,
         destination: destination,
-        // waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
         travelMode: 'DRIVING',
         avoidTolls: true
     }, function(response, status) {
@@ -220,19 +219,15 @@ function displayRoute(origin, destination) {
 }
 
 function computeTotalDistance(result) {
-    var total = 0;
-    var myroute = result.routes[0];
-    for (var i = 0; i < myroute.legs.length; i++) {
+    let total = 0;
+    let myroute = result.routes[0];
+    for (let i = 0; i < myroute.legs.length; i++) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
     document.getElementById('total').innerHTML = total + ' km';
 }
 
-function populateAddressInfo( string ) {
-    const arrayOfString = string.split(',');
-    console.log(arrayOfString);
-}
 
 /**
  * callback function. when user presses start over button or logo button, go
