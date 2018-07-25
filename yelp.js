@@ -32,7 +32,6 @@ function requestYelpData (name, address, city) {
         error: function () {
             console.log("fail")
         }
-
     }
     $.ajax(yelpAPI)
 }

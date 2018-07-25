@@ -4,7 +4,7 @@ var food = sessionStorage.getItem("setFood");
 console.log("food Item: ", food);
 
 function initializeApp(){
-    nutritionCallFromServer();
+    //nutritionCallFromServer();
 }
 
 function nutritionCallFromServer(){
