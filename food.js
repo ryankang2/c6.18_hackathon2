@@ -27,6 +27,8 @@ function applyClickHandler(){
   $("#pac-input").hide();
 }
 
+
+
 /**
  * if user clicks button, hide the picture and show the map
  */
@@ -36,6 +38,7 @@ function showMap(){
   $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
+
 }
 
 
@@ -82,7 +85,7 @@ function initAutocomplete() {
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+      var places = searchBox.getPlaces();
 
         if (places.length == 0) {
             return;
@@ -196,4 +199,3 @@ function populateAddressInfo( string ) {
     console.log(arrayOfString);
     let address
 }
-
