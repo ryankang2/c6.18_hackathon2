@@ -21,7 +21,6 @@ function addClickHandler () {
  * @param  {}
  */
 function submitClicked () {
-    debugger;
     retrieveInput();
     changePage();
 }
@@ -31,5 +30,8 @@ function changePage () {
 }
 
 function retrieveInput () {
-    foodInput = $("#foodInput").val();
+    foodInput = $("#food").val();
+    var food = sessionStorage;
+    food.setFood = foodInput;
+    console.log("food input: ", foodInput); 
 }

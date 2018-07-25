@@ -1,15 +1,18 @@
 $(document).ready(initializeApp);
 
+let food = sessionStorage.getItem("setFood");
+
+
 function initializeApp(){
-    $('#food').click(nutritionCallFromServer);
+    // nutritionCallFromServer();
 }
 
 function nutritionCallFromServer(){
-    let userQuery = $('#foodInput').val();
+    let userQuery = food;
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-app-id": "d38bcc0d",
-        "x-app-key": "dc38dfdff469218670a11fd10065d6cb",
+        "x-app-id": "ff571cbd",
+        "x-app-key": "f4112a83315f79c5cdff346b54f08998",
         "x-remote-user-id": "0",
         "Cache-Control": "no-cache",
         "query": 'apple',
@@ -27,7 +30,11 @@ function nutritionCallFromServer(){
             console.log(response);
             let src = response.foods[0].photo.highres;
             let img = $('<img>').attr('src', src);
-            $('.test').append(img);
+            img.css({
+                "height": "100%",
+                 "width": "100%"
+            })
+            $('#pic').html(img);
         },
         error: function(){
             console.log('error');
