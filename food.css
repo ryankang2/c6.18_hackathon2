@@ -109,8 +109,8 @@
          transform: translate(-50%, -25%);
        }
 
-       .twitter {
-         height: 50%;
+       .yelp {
+         height: 55%;
          width: 50%;
          border: 2px dotted blue;
          position: relative;
