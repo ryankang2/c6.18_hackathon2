@@ -133,7 +133,6 @@ function initAutocomplete() {
                 
                 requestYelpData(name , address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
-                testClick(place.formatted_address);
             });
 
             // Create a marker for each place.

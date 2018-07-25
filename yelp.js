@@ -38,12 +38,52 @@ function requestYelpData (name, address, city) {
 }
 
 function getYelpDetails (id) {
-   debugger;
+    let customUrl = "https://yelp.ongandy.com/businesses/details";
+    let key = {
+        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
+        id: id,
+      }
+    let yelpAPI = {
+        data: key,
+        url: customUrl,
+        method: "POST",
+        dataType: "json",
+        success:  createYelpDisplay,
+        error: function () {
+            console.log("fail")
+        }
+    }
+    $.ajax(yelpAPI)
+}
+
+/**
+ * @param  {} object response from yelp api
+ * Function the displays the data to dom dynamically
+ */
+function createYelpDisplay(response) {
+    let name = response.name;
+    $(".name").text(name);
+    let phone = response.display_phone;
+    $('.phone').text(phone);
+    let price = response.price;
+    let reviewCount = response.review_count;
+    let rating = response.rating;
+    $('.reviews').text( ` ${price} , ${reviewCount} reviews, ${rating}/5 Stars`)
+    let type = response.categories[0].title;
+    $('.type').text(type);
+    let displayAddress = response.location.display_address[0];
+    $('.address').text(displayAddress);
+    let openStatus = response.is_closed;
+    if(openStatus) {
+        $('.openOrClosed').text("Closed").css('color','red');
+    } else {
+        $('.openOrClosed').text("OPEN").css('color','green');
+    }
    let customUrl = "https://yelp.ongandy.com/businesses/details";
    let key = {
        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
        id: id,
-     }
+   }
    let yelpAPI = {
        data: key,
        url: customUrl,
@@ -57,12 +97,4 @@ function getYelpDetails (id) {
        }
    }
    $.ajax(yelpAPI)
-}
-
-/**
-* @param  {} object response from yelp api
-* Function the displays the data to dom dynamically
-*/
-function createYelpDisplay(object) {
-   
 }

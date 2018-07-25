@@ -1,3 +1,32 @@
+table{
+    background-color: green;
+    width: 50px;
+}
+
+#right-panel {
+   font-family: 'Roboto','sans-serif';
+   line-height: 30px;
+   padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+   font-size: 15px;
+}
+
+#right-panel select {
+   width: 100%;
+}
+
+#right-panel i {
+   font-size: 12px;
+}
+
+#right-panel {
+   float: right;
+   width: 34%;
+   height: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -32,7 +61,6 @@
   height: 80vh;
   display: none;
 }
-
 
 #findMore {
   display: inline-block;
