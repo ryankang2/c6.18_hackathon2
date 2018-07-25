@@ -138,10 +138,6 @@ table{
   width: 90%;
 }
 
-.yelpImage img {
-  width: 100%;
-  position: relative;
-}
 
 #map {
   height: 50vh;
@@ -150,6 +146,7 @@ table{
 #yelpImage {
   height:100%;
   width: 100%;
+  font-size:0;
 }
 
 .yelp > div {
@@ -160,8 +157,11 @@ table{
 .yelpTitle {
   font-weight: bold;
   border: 1.2px solid black;
+  position: relative;
+  bottom:0.75vw;
 }
 
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
+  padding-bottom: 3%;
 }
