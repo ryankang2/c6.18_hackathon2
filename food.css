@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 table{
     background-color: green;
     width: 50px;
@@ -27,12 +31,13 @@ table{
    height: 100%;
 }
 
-* {
-  box-sizing: border-box;
-}
 
 #logo {
   width: 5%;
+}
+
+#logo:hover{
+  cursor: pointer;
 }
 
 .nav-wrapper {
@@ -59,7 +64,7 @@ table{
 
 .nutritionTitles {
   display: inline-block;
-  width: 100%
+  width: 100%;
 }
 
 #map{
@@ -69,8 +74,30 @@ table{
 
 #findMore {
   display: inline-block;
-  /* padding: 15px 25px; */
-  /* font-size: 24px; */
+  background-color: rgb(13, 179, 13);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#findMore:hover {
+  background-color: rgb(36, 129, 13);
+}
+
+#findMore:active {
+  background-color:rgb(18, 85, 5);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#reset {
+  display: inline-block;
+  background-color: red;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -81,12 +108,12 @@ table{
   box-shadow: 0 5px #999;
 }
 
-#findMore:hover {
-  background-color: rgb(194, 132, 16);
+#reset:hover {
+  background-color: rgb(190, 28, 16);
 }
 
-#findMore:active {
-  background-color: #3e8e41;
+#reset:active {
+  background-color:rgb(126, 15, 7);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -97,6 +124,10 @@ table{
 
 .nutrition > div {
   border: 2px solid black;
+}
+
+.nutrition > div:nth-child(1) {
+  font-weight: bold;
 }
 
 .nutritionTitles > div {
@@ -124,5 +155,13 @@ table{
 .yelp > div {
   border: 2px solid black;
   margin-top: 10%;
+}
 
+.yelpTitle {
+  font-weight: bold;
+  border: 1.2px solid black;
+}
+
+.yelpTitle, .yelpInfo {
+  padding-left: 2%;
 }
