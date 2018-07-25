@@ -1,33 +1,5 @@
-
-table{
-    background-color: green;
-    width: 50px;
-}
-#right-panel {
-   font-family: 'Roboto','sans-serif';
-   line-height: 30px;
-   padding-left: 10px;
-}
-
-#right-panel select, #right-panel input {
-   font-size: 15px;
-}
-
-#right-panel select {
-   width: 100%;
-}
-
-#right-panel i {
-   font-size: 12px;
-}
-#right-panel {
-   float: right;
-   width: 34%;
-   height: 100%;
-}
-
 * {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   box-sizing: border-box;
 }
 
@@ -38,7 +10,6 @@ table{
 .nutritionTitles {
   display: inline-block;
   width: 70%
-
 }
 
 .nutritionValue {
@@ -50,4 +21,28 @@ table{
 #map {
   height: 50vh;
   display: none;
+}
+
+#findMore {
+  display: inline-block;
+  /* padding: 15px 25px; */
+  /* font-size: 24px; */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+#findMore:hover {
+  background-color: rgb(194, 132, 16);
+}
+
+#findMore:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
