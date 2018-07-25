@@ -1,26 +1,29 @@
 
 var infoWindow;
 
+
+var origin = {lat: 33.8688, lng: -117.2195};
+
 $(document).ready(initializeApp);
 
 let foodInput = null;
 
 function initializeApp() {
   applyClickHandler();
-
 }
 
-var origin = {lat: -33.8688, lng: 151.2195};
 var map;
+let previousInfoWindow = false;
+let previousRoute = false;
 
-
-$(document).ready(applyClickHandler);
-
+let foodName = sessionStorage.getItem("setFood");
 /**
  * Apply click handler to FindMore button
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
+  // need fix for foodname display
+  $(".foodName").text(foodName);
   $("#pac-input").hide();
 }
 
@@ -50,7 +53,7 @@ function initAutocomplete() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -59,6 +62,7 @@ function initAutocomplete() {
             infoWindow.setContent('You are Here');
             infoWindow.open(map);
             map.setCenter(pos);
+            previousInfoWindow = infoWindow;
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -123,9 +127,11 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
+                previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
                 debugger;
                 infoWindow.open(map, markerLocation);
+                previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
                 console.log(arrayOfString);
@@ -167,8 +173,11 @@ function displayRoute(origin, destination) {
         travelMode: 'DRIVING',
         avoidTolls: true
     }, function(response, status) {
+      
         if (status === 'OK') {
             display.setDirections(response);
+            previousRoute = true;
+
         } else {
             alert('Could not display directions due to: ' + status);
         }
@@ -185,15 +194,8 @@ function computeTotalDistance(result) {
     document.getElementById('total').innerHTML = total + ' km';
 }
 
-
 function populateAddressInfo( string ) {
     const arrayOfString = string.split(',');
     console.log(arrayOfString);
     let address
-}
-
-function testClick(addr){
-    console.log('From test click:', addr);
-    placeObj = addr;
-
 }

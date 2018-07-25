@@ -10,31 +10,30 @@
 */
 
 function requestYelpData (name, address, city) {
-   let customUrl = "https://yelp.ongandy.com/businesses/matches";
-   let key = {
-       api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
-       name: name,
-       address1: address,
-       city: city,
-       state: "CA",
-       country: "US",
-     }
-   let yelpAPI = {
-       data: key,
-       url: customUrl,
-       method: "POST",
-       dataType: "json",
-       success: function (response) {
-           console.log(response);
-           var businessId = response.businesses[0].id;
-           getYelpDetails(businessId);
-       },
-       error: function () {
-           console.log("fail")
-       }
-
-   }
-   $.ajax(yelpAPI)
+    let customUrl = "https://yelp.ongandy.com/businesses/matches";
+    let key = {
+        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
+        name: name,
+        address1: address,
+        city: city,
+        state: "CA",
+        country: "US",
+      }
+    let yelpAPI = {
+        data: key,
+        url: customUrl,
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log("success", response);
+            var businessId= response.businesses[0].id;
+            getYelpDetails(businessId);
+        },
+        error: function () {
+            console.log("fail")
+        }
+    }
+    $.ajax(yelpAPI)
 }
 
 function getYelpDetails (id) {
@@ -61,6 +60,8 @@ function getYelpDetails (id) {
  * Function the displays the data to dom dynamically
  */
 function createYelpDisplay(response) {
+    console.log("Dive Into This Object ---->   ",response);
+    debugger;
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
@@ -73,28 +74,12 @@ function createYelpDisplay(response) {
     $('.type').text(type);
     let displayAddress = response.location.display_address[0];
     $('.address').text(displayAddress);
-    let openStatus = response.is_closed;
+    let businessImage = response.image_url;
+    $('#yelpImage').attr('src', businessImage);
+    let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
-        $('.openOrClosed').text("Closed").css('color','red');
-    } else {
         $('.openOrClosed').text("OPEN").css('color','green');
+    } else {
+        $('.openOrClosed').text("CLOSED").css('color','red');
     }
-   let customUrl = "https://yelp.ongandy.com/businesses/details";
-   let key = {
-       api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
-       id: id,
-   }
-   let yelpAPI = {
-       data: key,
-       url: customUrl,
-       method: "POST",
-       dataType: "json",
-       success: function (response) {
-           console.log("detail:", response);
-       },
-       error: function () {
-           console.log("fail")
-       }
-   }
-   $.ajax(yelpAPI)
 }
