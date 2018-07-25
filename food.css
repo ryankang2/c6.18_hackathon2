@@ -1,5 +1,4 @@
 * {
-  border: 1px solid black;
   box-sizing: border-box;
 }
 
@@ -7,18 +6,50 @@
   width: 5%;
 }
 
-.nutritionTitles {
-  display: inline-block;
-  width: 70%
-}
-
-.nutritionValue {
-  display: inline-block;
-  width: 25%;
-  text-align: right;
+.nav-wrapper {
+  border: 2px solid black;
 }
 
 #map {
-  height: 50vh;
+  margin-top: 4%;
+}
+
+.nutrition {
+  margin-top: 5%;
+}
+
+.nutritionTitles {
+  display: inline-block;
+  width: 100%
+}
+
+#map {
+  height: 80vh;
   display: none;
+}
+
+.nutritionTitles .right-align {
+  float: right;
+}
+
+.nutrition > div{
+  border: 2px solid black;
+}
+
+.nutritionTitles > div {
+  border: 1px solid black;
+}
+
+.yelp {
+  width: 90%;
+}
+
+.yelpImage img {
+  width: 100%;
+  position: relative;
+}
+
+.yelp > div {
+  border: 2px solid black;
+  margin-top: 10%;
 }

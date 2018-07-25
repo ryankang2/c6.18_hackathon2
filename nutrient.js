@@ -45,7 +45,7 @@ function nutritionCallFromServer(){
 }
 
 function storeNutritionToDOM (foodObj) {
-    $(".serving").text(foodObj.serving_qty);
+    $(".serving").text(foodObj.serving_qty + " " + foodObj.serving_unit);
     $(".unit").text(foodObj.serving_unit);
     $(".calories").text(foodObj.nf_calories + " kcal");
     $(".carbohydrate").text(foodObj.nf_total_carbohydrate + " g");
