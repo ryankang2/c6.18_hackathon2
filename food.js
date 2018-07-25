@@ -1,10 +1,9 @@
-
-
 var infoWindow;
+var origin = {lat: -33.8688, lng: 151.2195};
+var map;
 
 function initAutocomplete() {
-    var origin = {lat: -33.8688, lng: 151.2195};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: origin,
         zoom: 13,
         mapTypeId: 'roadmap'
@@ -103,3 +102,36 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+
+function displayRoute(origin, destination) {
+    var service = new google.maps.DirectionsService;
+    var display = new google.maps.DirectionsRenderer({
+        draggable: true,
+        map: map,
+        panel: document.getElementById('right-panel')
+    });
+    service.route({
+        origin: origin,
+        destination: destination,
+        // waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
+        travelMode: 'DRIVING',
+        avoidTolls: true
+    }, function(response, status) {
+        if (status === 'OK') {
+            display.setDirections(response);
+        } else {
+            alert('Could not display directions due to: ' + status);
+        }
+    });
+}
+
+function computeTotalDistance(result) {
+    var total = 0;
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+        total += myroute.legs[i].distance.value;
+    }
+    total = total / 1000;
+    document.getElementById('total').innerHTML = total + ' km';
+}
+
