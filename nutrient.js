@@ -12,7 +12,9 @@ function initializeApp(){
     nutritionCallFromServer();
 }
 
-
+/**
+ * AJAX call to nutritonix to get nutrition info
+ */
 function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
@@ -52,7 +54,10 @@ function nutritionCallFromServer(){
 }
 
 
-
+/**
+ * Updates DOM with nutrition facts
+ * @param  {} foodObj the food object retrieved from nutrition api
+ */
 function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty);
    $(".unit").text(foodObj.serving_unit);
