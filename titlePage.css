@@ -1,5 +1,4 @@
 * {
-    /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
@@ -8,13 +7,17 @@ body {
 }
 
 #logo {
-    margin-top: 8%;
+    margin-top: 5%;
 }
 
 #logoImage {
     position: relative;
     margin: auto;
     transform: rotate(-15deg)
+}
+
+#nameImage{
+    height: 120px;
 }
 
 .formSection {

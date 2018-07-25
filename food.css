@@ -31,8 +31,12 @@ table{
    height: 100%;
 }
 
+.orange{
+  position: relative
+}
 
 #logo {
+  display: inline-block;
   width: 5%;
 }
 
@@ -40,9 +44,20 @@ table{
   cursor: pointer;
 }
 
-.nav-wrapper {
-  border: 2px solid black;
+
+#nameTitle{
+    display: inline;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(5, 129, 5);
+    font-size: 24px;
+    font-weight: bold;
 }
+
+/* .nav-wrapper {
+  border: 2px solid black;
+} */
 
 #mapAndPic {
   width: 100%;
@@ -165,3 +180,23 @@ table{
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
 }
+
+.errorBackground{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.errMsg{
+  height: 30%;
+  width: 40%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+

@@ -18,7 +18,7 @@ function requestYelpData (name, address, city) {
         city: city,
         state: "CA",
         country: "US",
-      }
+    }
     let yelpAPI = {
         data: key,
         url: customUrl,
@@ -61,7 +61,6 @@ function getYelpDetails (id) {
  */
 function createYelpDisplay(response) {
     console.log("Dive Into This Object ---->   ",response);
-    debugger;
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
