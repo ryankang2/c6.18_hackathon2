@@ -1,13 +1,13 @@
 // $(document).ready(initializeApp);
 // let foodItem = sessionStorage.setFood;
-    let foodItem = "taco";
-    let yelpResponse = null;
-    
+   let foodItem = "taco";
+   let yelpResponse = null;
+   
 /**
- * @param  {keywordOfAddress, location}
- * @return {list of resturants}
- * Function that pulls yelp API with keyword/address search and current location (city)
- */
+* @param  {keywordOfAddress, location}
+* @return {list of resturants}
+* Function that pulls yelp API with keyword/address search and current location (city)
+*/
 
 function requestYelpData (name, address, city) {
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
@@ -37,7 +37,6 @@ function requestYelpData (name, address, city) {
 }
 
 function getYelpDetails (id) {
-    debugger;
     let customUrl = "https://yelp.ongandy.com/businesses/details";
     let key = {
         api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
@@ -48,9 +47,7 @@ function getYelpDetails (id) {
         url: customUrl,
         method: "POST",
         dataType: "json",
-        success: function (response) {
-            console.log("Business Detail   :", response);
-        },
+        success:  createYelpDisplay,
         error: function () {
             console.log("fail")
         }
@@ -62,6 +59,27 @@ function getYelpDetails (id) {
  * @param  {} object response from yelp api
  * Function the displays the data to dom dynamically
  */
-function createYelpDisplay(object) {
-    
+function createYelpDisplay(response) {
+    console.log("Dive Into This Object ---->   ",response);
+    debugger;
+    let name = response.name;
+    $(".name").text(name);
+    let phone = response.display_phone;
+    $('.phone').text(phone);
+    let price = response.price;
+    let reviewCount = response.review_count;
+    let rating = response.rating;
+    $('.reviews').text( ` ${price}, ${reviewCount} reviews, ${rating}/5 Stars`)
+    let type = response.categories[0].title;
+    $('.type').text(type);
+    let displayAddress = response.location.display_address[0];
+    $('.address').text(displayAddress);
+    let businessImage = response.image_url;
+    $('#yelpImage').attr('src', businessImage);
+    let openStatus = response.hours[0].is_open_now;
+    if(openStatus) {
+        $('.openOrClosed').text("OPEN").css('color','green');
+    } else {
+        $('.openOrClosed').text("CLOSED").css('color','red');
+    }
 }

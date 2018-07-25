@@ -44,7 +44,7 @@ table{
   margin-top: 4%;
 }
 
-#pic img {
+#pic img{
   width: 60%;
 }
 
@@ -62,11 +62,35 @@ table{
   width: 100%
 }
 
-#map {
+#map{
   height: 80vh;
   display: none;
 }
 
+#findMore {
+  display: inline-block;
+  /* padding: 15px 25px; */
+  /* font-size: 24px; */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+#findMore:hover {
+  background-color: rgb(194, 132, 16);
+}
+
+#findMore:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ 
 .nutritionTitles .right-align {
   float: right;
 }
@@ -88,7 +112,17 @@ table{
   position: relative;
 }
 
+#map {
+  height: 50vh;
+}
+
+#yelpImage {
+  height:100%;
+  width: 100%;
+}
+
 .yelp > div {
   border: 2px solid black;
   margin-top: 10%;
+
 }
