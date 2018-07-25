@@ -10,6 +10,7 @@ let foodName = sessionStorage.getItem("setFood");
 
 function initializeApp() {
   applyClickHandler();
+ 
 }
 
 var map;
@@ -28,6 +29,17 @@ function applyClickHandler(){
   $("#pac-input").hide();
 }
 
+function submitFormData () {
+    // var e = jQuery.Event("keydown");
+    // e.which = 13;
+    // $("#pac-input").trigger(e);
+    var input = document.getElementById('pac-input');
+    try {
+        google.maps.event.trigger( input, 'focus');
+    } finally {
+        google.maps.event.trigger( input, 'keydown', {keyCode:13});
+    }
+}
 
 
 /**
@@ -37,8 +49,9 @@ function showMap(){
   $("#pic").hide();
   $("#map").show();
   $("#pac-input").show();
-  $("#pac-input").val(foodName);
-
+  foodInput = sessionStorage.getItem("setFood");
+  $("#pac-input").val(foodInput);
+  setTimeout(submitFormData, 5000);
 }
 
 
@@ -74,6 +87,7 @@ function initAutocomplete() {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
+
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.

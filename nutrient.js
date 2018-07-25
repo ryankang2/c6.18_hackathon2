@@ -4,7 +4,9 @@ var food = sessionStorage.getItem("setFood");
 console.log("food Item: ", food);
 
 function initializeApp(){
-    nutritionCallFromServer();
+    $(".submit").addClass("scale-in");
+    $("#reset").addClass("scale-in");
+    // nutritionCallFromServer();
 }
 
 
@@ -21,7 +23,7 @@ function nutritionCallFromServer(){
    }
    let options = {
        dataType: 'json',
-    //    url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
+       url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
        headers: dataForServer,
        data: {
            'query': userQuery
