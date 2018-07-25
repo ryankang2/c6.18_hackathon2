@@ -73,12 +73,7 @@ function initAutocomplete() {
         markers = [];
 
         // For each place, get the 
-      
-      
-      
-      
-      
-    // name and location.
+
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             console.log(place);
@@ -107,7 +102,19 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
+                console.log( "PLACE:  " ,place )
+                debugger;
                 infoWindow.open(map, markerLocation);
+                // break the address up into street address , cit
+                const arrayOfString = place.formatted_address.split(',');
+                console.log(arrayOfString);
+                const address = arrayOfString[0];
+                const cityName = arrayOfString[1];
+                const name = place.name;
+                // send sudip lat and long
+                
+                requestYelpData(name , address, cityName);
+                displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
                 testClick(place.formatted_address);
             });
 
@@ -124,7 +131,36 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+function populateAddressInfo( string ) {
+    const arrayOfString = string.split(',');
+    console.log(arrayOfString);
+    let address
+
+
+}
 
 function testClick(addr){
     console.log('From test click:', addr);
+}
+
+function requestYelpData (keywordOrAddress = irvine,) {
+    debugger;
+    let key = {
+        api_key: "XSyryzoREYThrY1P0pDAkbK9uJV0j7TVklsKegO9g9aqqqGz87SZPuhQ0Cob0jzZ6G1BCVE9JaycPHyB2OI7hXgTJYs_enS7SKr1G21Jf45cDBYbUAHOFnh-r3FWW3Yx",
+        term: keywordOrAddress,
+        //location: location
+    }
+    let yelpAPI = {
+        data: key,
+        url: "https://yelp.ongandy.com/businesses",
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log(response)
+        },
+        error: function () {
+            console.log("fail")
+        }
+    }
+    $.ajax(yelpAPI)
 }
