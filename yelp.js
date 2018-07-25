@@ -8,7 +8,7 @@
 function requestYelpData (keywordOrAddress = irvine, location = irvine) {
     debugger;
     let key = {
-        api_key: "XSyryzoREYThrY1P0pDAkbK9uJV0j7TVklsKegO9g9aqqqGz87SZPuhQ0Cob0jzZ6G1BCVE9JaycPHyB2OI7hXgTJYs_enS7SKr1G21Jf45cDBYbUAHOFnh-r3FWW3Yx",
+        api_key: "8omc0Yh_VpsNVtwSesxDrxKYNBTjSx4unT_tUQKxv7FpvWGn9QmAhpI2XlvNHaN3NDrwdY2UahjFHb5Qu6KhuzlLFQ04LzbCJT1BocPCAAiMEJpovT3fWX4IoKtXW3Yx",
         term: keywordOrAddress,
         location: location
     }
