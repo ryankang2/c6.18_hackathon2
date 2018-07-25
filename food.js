@@ -1,7 +1,6 @@
 
 var infoWindow;
 
-
 var origin = {lat: 33.8688, lng: -117.2195};
 
 $(document).ready(initializeApp);
@@ -27,9 +26,6 @@ function applyClickHandler(){
   // need fix for foodname display
   $(".foodName").text(foodName);
   $("#pac-input").hide();
-  $('#goThere').click(function(){
-        $('#displayDirection').modal('show');
-  });
 }
 
 function submitFormData () {
@@ -51,13 +47,15 @@ function submitFormData () {
 function showMap(){
   $("#pic").hide();
   $("#map").show();
-  $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
   setTimeout(submitFormData, 5000);
 }
 
-
+/**
+ * @param none
+ * this function is called from food.htmls
+ */
 function initAutocomplete() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: origin,
@@ -67,6 +65,7 @@ function initAutocomplete() {
 
     infoWindow = new google.maps.InfoWindow;
 
+    //this is gives us the current location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             const pos = {
@@ -98,6 +97,7 @@ function initAutocomplete() {
         searchBox.setBounds(map.getBounds());
     });
 
+    //this array hold all the markers in the radius
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
@@ -118,7 +118,6 @@ function initAutocomplete() {
 
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
-            console.log(place);
             if (!place.geometry) {
                 console.log("Returned place contains no geometry");
                 return;
@@ -146,7 +145,6 @@ function initAutocomplete() {
             markerLocation.addListener('click', function() {
                 previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
-                debugger;
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
@@ -175,7 +173,30 @@ function initAutocomplete() {
     });
 }
 
+/**
+ *
+ * @param browserHasGeolocation
+ * @param infoWindow
+ * @param pos
+ * this function is called when not able to find the location
+ */
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}
+
+/**
+ *
+ * @param origin
+ * @param destination
+ * this function display the route on the map
+ */
 function displayRoute(origin, destination) {
+    //service object gets data of directions
+    //display object overlays the direction on the map
     var service = new google.maps.DirectionsService;
     var display = new google.maps.DirectionsRenderer({
         draggable: true,
@@ -193,8 +214,10 @@ function displayRoute(origin, destination) {
       
         if (status === 'OK') {
             if (previousRoute){
+                //here we set previous route to null so it clears the previous route
                 previousRoute.setMap(null);
             }
+            // saved reference of the previous route so we could erase from the map when new destination is clicked
             previousRoute = display;
             display.setDirections(response);
         } else {
@@ -203,6 +226,10 @@ function displayRoute(origin, destination) {
     });
 }
 
+/**
+ * this function calculates the distance of two points
+ * @param result
+ */
 function computeTotalDistance(result) {
     var total = 0;
     var myroute = result.routes[0];
@@ -210,6 +237,7 @@ function computeTotalDistance(result) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
+    // it displays in km, in future we will converting to miles
     document.getElementById('total').innerHTML = total + ' km';
 }
 

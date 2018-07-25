@@ -6,32 +6,6 @@ table{
     background-color: green;
     width: 50px;
 }
-
-#right-panel {
-   font-family: 'Roboto','sans-serif';
-   line-height: 30px;
-   padding-left: 10px;
-}
-
-#right-panel select, #right-panel input {
-   font-size: 15px;
-}
-
-#right-panel select {
-   width: 100%;
-}
-
-#right-panel i {
-   font-size: 12px;
-}
-
-#right-panel {
-   float: right;
-   width: 34%;
-   height: 100%;
-}
-
-
 #logo {
   width: 5%;
 }
@@ -164,4 +138,71 @@ table{
 
 .yelpTitle, .yelpInfo {
   padding-left: 2%;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 300vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal > * {
+  display: inline-block;
+}
+.modal-content{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #c5a24e;
+  background-image: url("../images/backgrounds/info.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px;
+  border-radius: 20px;
+}
+.modal-header{
+  margin: 10px;
+  float: right;
+}
+.modal-message > p{
+  font-family: "Parry Hotter";
+  text-shadow: 2px 2px #a44147;
+  color: #116a13;
+  font-size: 3em;
+  text-align: center;
+  animation: jackInTheBox 1s;
+}
+.modal-footer{
+  text-align: center;
 }

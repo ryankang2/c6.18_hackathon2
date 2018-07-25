@@ -6,7 +6,7 @@ console.log("food Item: ", food);
 function initializeApp(){
     $(".submit").addClass("scale-in");
     $("#reset").addClass("scale-in");
-    // nutritionCallFromServer();
+    nutritionCallFromServer();
 }
 
 
@@ -15,22 +15,24 @@ function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-       "x-app-id": "0657689d",
-       "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-app-id": "d38bcc0d",
+       // "x-app-id": "0657689d",
+       "x-app-key": 'dc38dfdff469218670a11fd10065d6cb',
+       // "x-app-key": "1c577a065dc2109313e314fdb410b965",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
-   }
+   };
    let options = {
        dataType: 'json',
-       url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
+       url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
+       // url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
        headers: dataForServer,
        data: {
            'query': userQuery
        },
        method: 'post',
        success: function(response) {
-           console.log(response);
            let src = response.foods[0].photo.highres;
            let img = $('<img>').attr('src', src);
            
