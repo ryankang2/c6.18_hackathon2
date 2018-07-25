@@ -1,8 +1,11 @@
 
 var infoWindow;
 
-var origin = {lat: -33.8688, lng: 151.2195};
+var origin = {lat: 33.8688, lng: -117.2195};
 var map;
+let previousInfoWindow = false;
+
+
 
 
 $(document).ready(applyClickHandler);
@@ -32,7 +35,7 @@ function initAutocomplete() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -43,6 +46,7 @@ function initAutocomplete() {
             infoWindow.setContent('You are Here');
             infoWindow.open(map);
             map.setCenter(pos);
+            previousInfoWindow = infoWindow;
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -107,9 +111,12 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener('click', function() {
+                if( previousInfoWindow)
+                previousInfoWindow.close();
                 console.log( "PLACE:  " ,place )
                 debugger;
                 infoWindow.open(map, markerLocation);
+                previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
                 const arrayOfString = place.formatted_address.split(',');
                 console.log(arrayOfString);
@@ -169,15 +176,6 @@ function computeTotalDistance(result) {
     document.getElementById('total').innerHTML = total + ' km';
 }
 
-
-function populateAddressInfo( string ) {
-    const arrayOfString = string.split(',');
-    console.log(arrayOfString);
-    let address
-
-
-}
-
 // function requestYelpData (name, address, city) {
 //     let customUrl = "https://yelp.ongandy.com/businesses/matches";
 //     let key = {
@@ -205,3 +203,4 @@ function populateAddressInfo( string ) {
 //     }
 //     $.ajax(yelpAPI)
 // }
+

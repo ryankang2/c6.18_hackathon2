@@ -62,6 +62,8 @@ function getYelpDetails (id) {
  * Function the displays the data to dom dynamically
  */
 function createYelpDisplay(response) {
+    console.log("Dive Into This Object ---->   ",response);
+    debugger;
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
@@ -74,10 +76,10 @@ function createYelpDisplay(response) {
     $('.type').text(type);
     let displayAddress = response.location.display_address[0];
     $('.address').text(displayAddress);
-    let openStatus = response.is_closed;
+    let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
-        $('.openOrClosed').text("Closed").css('color','red');
-    } else {
         $('.openOrClosed').text("OPEN").css('color','green');
+    } else {
+        $('.openOrClosed').text("CLOSED").css('color','red');
     }
 }
