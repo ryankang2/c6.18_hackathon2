@@ -1,3 +1,111 @@
+
+       #map {
+        height: 60%;
+        width:60%;
+        margin: 0;
+        position: relative;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        display: block;
+  
+      }
+    
+      html, body {
+        height: 100%;
+        width:100%;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100%;
+        width:100%;
+        display: inline-block;
+      }
+      .leftSideDisplay {
+        height: 100%;
+        width: 50%;
+        border: 2px solid blue;
+        position: relative;
+        float: left;
+       
+      }
+      .submit {
+        height: 10%;
+        position: absolute;
+        background-color: green;
+        bottom: 10%;
+        right: 15%; 
+        font-size: 1vmin;     
+      
+      }
+      .searchBar{
+        width: 40%;
+        height:3%;
+        display: block;
+        position: relative;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: pink;
+      }
+      .rightSideDisplay {
+        height: 100%;
+        width: 48%;
+        border: 2px solid green;
+        position: relative;
+        left: 50%;
+        margin: 0;
+      }
+
+      .nutrition {
+          background-color: #0f2027;
+        height: 35%;
+        width: 50%;
+        border: 2px red solid;
+        position: relative; 
+        display: block;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -25%);
+      }
+
+      .twitter {
+        height: 50%;
+        width: 50%;
+        border: 2px dotted blue;
+        position: relative;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -25%);
+      }
+
+table{
+    background-color: green;
+    width: 50px;
+}
+#right-panel {
+   font-family: 'Roboto','sans-serif';
+   line-height: 30px;
+   padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+   font-size: 15px;
+}
+
+#right-panel select {
+   width: 100%;
+}
+
+#right-panel i {
+   font-size: 12px;
+}
+#right-panel {
+   float: right;
+   width: 34%;
+   height: 100%;
+
 * {
   border: 1px solid black;
   box-sizing: border-box;
@@ -10,6 +118,7 @@
 .nutritionTitles {
   display: inline-block;
   width: 70%
+
 }
 
 .nutritionValue {
