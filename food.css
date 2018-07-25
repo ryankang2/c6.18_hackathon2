@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 table{
     background-color: green;
     width: 50px;
@@ -27,12 +31,13 @@ table{
    height: 100%;
 }
 
-* {
-  box-sizing: border-box;
-}
 
 #logo {
   width: 5%;
+}
+
+#logo:hover{
+  cursor: pointer;
 }
 
 .nav-wrapper {
@@ -69,8 +74,7 @@ table{
 
 #findMore {
   display: inline-block;
-  /* padding: 15px 25px; */
-  /* font-size: 24px; */
+  background-color: rgb(13, 179, 13);
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -82,11 +86,34 @@ table{
 }
 
 #findMore:hover {
-  background-color: rgb(194, 132, 16);
+  background-color: rgb(36, 129, 13);
 }
 
 #findMore:active {
-  background-color: #3e8e41;
+  background-color:rgb(18, 85, 5);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#reset {
+  display: inline-block;
+  background-color: red;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+#reset:hover {
+  background-color: rgb(190, 28, 16);
+}
+
+#reset:active {
+  background-color:rgb(126, 15, 7);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }

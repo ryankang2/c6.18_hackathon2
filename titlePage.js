@@ -53,10 +53,18 @@ function submitClicked () {
     changePage();
 }
 
+/**
+ *  Changes the page  
+ */
 function changePage () {
+    // nutritionCallFromServer($("#food").val());
+
     location.assign("food.html")
 }
-
+/**
+ * Will use session storage to get user
+ * input
+ */
 function retrieveInput () {
     foodInput = $("#food").val();
     var food = sessionStorage;
