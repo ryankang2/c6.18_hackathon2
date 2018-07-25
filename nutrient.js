@@ -4,7 +4,42 @@ var food = sessionStorage.getItem("setFood");
 console.log("food Item: ", food);
 
 function initializeApp(){
-   nutritionCallFromServer();
+//    nutritionCallFromServer();
+}
+
+
+function nutritionCallFromServer(){
+   let userQuery = food;
+   let dataForServer = {
+       "Content-Type": "application/x-www-form-urlencoded",
+       "x-app-id": "0657689d",
+       "x-app-key": "1c577a065dc2109313e314fdb410b965",
+       "x-remote-user-id": "0",
+       "Cache-Control": "no-cache",
+       "query": 'apple',
+   }
+   let options = {
+       dataType: 'json',
+    //    url: 'https://maps.google.com/maps/contrib/115173066447171785733/photos',
+       headers: dataForServer,
+       data: {
+           'query': userQuery
+       },
+       method: 'post',
+       success: function(response) {
+           debugger;
+           console.log(response);
+           let src = response.foods[0].photo.highres;
+           let img = $('<img>').attr('src', src);
+           
+           $('#pic').html(img);
+           storeNutritionToDOM(response.foods[0])
+       },
+       error: function(){
+           console.log('error');
+       }
+   }
+   $.ajax(options);
 }
 
 function nutritionCallFromServer(){
