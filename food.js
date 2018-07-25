@@ -10,6 +10,7 @@ let foodInput = null;
 
 function initializeApp() {
   applyClickHandler();
+ 
 }
 
 var map;
@@ -27,6 +28,17 @@ function applyClickHandler(){
   $("#pac-input").hide();
 }
 
+function submitFormData () {
+    // var e = jQuery.Event("keydown");
+    // e.which = 13;
+    // $("#pac-input").trigger(e);
+    var input = document.getElementById('pac-input');
+    try {
+        google.maps.event.trigger( input, 'focus');
+    } finally {
+        google.maps.event.trigger( input, 'keydown', {keyCode:13});
+    }
+}
 
 
 /**
@@ -38,7 +50,7 @@ function showMap(){
   $("#pac-input").show();
   foodInput = sessionStorage.getItem("setFood");
   $("#pac-input").val(foodInput);
-
+  setTimeout(submitFormData, 5000);
 }
 
 
@@ -74,6 +86,22 @@ function initAutocomplete() {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
+
+    // var itemsloaded = google.maps.event
+    // .addDomListener(document.body,
+    //                 'DOMNodeInserted',
+    //                 function(e){ 
+    //   if(e.target.id==='pac-input'){
+    //     //remove the listener
+    //     google.maps.event.removeListener(itemsloaded);
+    //     //trigger the events
+    //     // google.maps.event.trigger( input, 'keydown', {keyCode:40})
+    //     // google.maps.event.trigger( input, 'keydown', {keyCode:13})
+    //     // google.maps.event.trigger( input, 'focus')
+    //     google.maps.event.trigger( input, 'keydown', {keyCode:13})
+    //   }
+    // });
+
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
