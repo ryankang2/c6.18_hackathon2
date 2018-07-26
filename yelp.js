@@ -1,14 +1,13 @@
 // $(document).ready(initializeApp);
 // let foodItem = sessionStorage.setFood;
-   let foodItem = "taco";
-   let yelpResponse = null;
+let foodItem = null;
+let yelpResponse = null;
    
 /**
 * @param  {keywordOfAddress, location}
 * @return {list of resturants}
 * Function that pulls yelp API with keyword/address search and current location (city)
 */
-
 function requestYelpData (name, address, city) {
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
     let key = {
@@ -25,16 +24,20 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            var businessId= response.businesses[0].id;
+            let businessId= response.businesses[0].id;
             getYelpDetails(businessId);
         },
-        error: function () {
-            console.log("fail")
+        error: function (error) {
+            console.log("error from requestYelpData: ", error);
         }
     }
     $.ajax(yelpAPI)
 }
 
+/**
+ * use business id from last ajax call to get more info on business
+ * @param id, business id we got from previous call
+ */
 function getYelpDetails (id) {
     let customUrl = "https://yelp.ongandy.com/businesses/details";
     let key = {
@@ -47,8 +50,8 @@ function getYelpDetails (id) {
         method: "POST",
         dataType: "json",
         success:  createYelpDisplay,
-        error: function () {
-            console.log("fail")
+        error: function (error) {
+            console.log("error from getYelpDetails: ", error);
         }
     }
     $.ajax(yelpAPI)

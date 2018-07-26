@@ -3,12 +3,16 @@ $(document).ready(initializeApp);
 let foodInput = null;
 
 /**
+ * apply click handlers once document is ready
  * @param {}
  */
 function initializeApp () {
     addClickHandler();
 }
 
+/**
+ * autofill complete
+ */
 $(function() {
     $('input.autocomplete').autocomplete({
         // can ajax nutri api for list, but unable too
@@ -33,6 +37,10 @@ $(function() {
         "Bread": null,
         "Chips": null,
         "Salsa": null,
+        "String cheese": null,
+        "Tofu": null,
+        "Salad": null,
+        "Ramen": null,
       }
     });
 });
@@ -45,7 +53,7 @@ function addClickHandler () {
     //when enter is pressed
     $(document).keyup(function(event) {
         if ($("#food").is(":focus") && event.key == "Enter") {
-            foodInput = $("#food");
+            retrieveInput();
             changePage();
         }
     });
@@ -73,7 +81,7 @@ function changePage () {
  */
 function retrieveInput () {
     foodInput = $("#food").val();
-    var food = sessionStorage;
+    let food = sessionStorage;
     food.setFood = foodInput;
 
 
