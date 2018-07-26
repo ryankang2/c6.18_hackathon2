@@ -6,26 +6,28 @@ let origin = {lat: 33.6348676, lng: -117.7405317};
 
 $(document).ready(initializeApp);
 
-let foodName = sessionStorage.getItem("setFood");
+let foodName = sessionStorage.getItem("setFood").toLowerCase();
 let map;
 let previousInfoWindow = false;
 let previousRoute = false;
 
+/**
+ * apply click handlers and put food name on display
+ */
 function initializeApp() {
   applyClickHandler();
+  $("#foodName").text(foodName);
 }
 
 /**
- * Make a function applyClickHandlers 
- * @param { none };
- * @returns { none };
- * 
  * Apply click handler to the button with the if of findMore that runs the startOver function
  * Apply click handler to reset button and logo that runs the startOver function
  * Apply click handler to reset button that runs the startOver function
  * Populate the search bar with the storage variable foodName
  * Hide the search bar with the id of pac-input
  * Apply a click handler to the button with the id of goThere have it display the model on click
+ * @param { none };
+ * @returns { none };
  */
 function applyClickHandler(){
   $("#findMore").click(showMap);
@@ -35,9 +37,11 @@ function applyClickHandler(){
   modalActivity();
 }
 
+/**
+ * shows directions modal when user presses get me there button
+ */
 function modalActivity(){
-    debugger;
-    var modal = document.getElementById('directionModal');
+    let modal = document.getElementById('directionModal');
     $('#goThere').click(function(){
         $('.modal').show();
     });
@@ -54,8 +58,6 @@ function modalActivity(){
 
 /**
  * Make a function to autosubmit the input data
- * @param: { none };
- * @return: { none };
  * Target the searchbar with the id pac-input
  * focus on 
  * Trigger the input equivalent to the enter button
@@ -76,8 +78,6 @@ function submitFormData () {
  * if user clicks button, hide the picture and show the map
  * fill the search bar with the variabe foodInput
  * set a timeout to submit the form data after a short delay 1 second
- * @param: { none };
- * @returns: { none };
  */
 function showMap(){
   $("#pic").hide();
@@ -154,13 +154,6 @@ function initAutocomplete() {
             if (!place.geometry) {
                 return;
             }
-            // var icon = {
-            //     url: place.icon,
-            //     size: new google.maps.Size(71, 71),
-            //     origin: new google.maps.Point(0, 0),
-            //     anchor: new google.maps.Point(17, 34),
-            //     scaledSize: new google.maps.Size(25, 25)
-            // };
 
             let infoWindow = new google.maps.InfoWindow({
                 content: `${place.name} <br> Rating: ${place.rating} `,
@@ -205,9 +198,9 @@ function initAutocomplete() {
 
 /**
  *
- * @param browserHasGeolocation
- * @param infoWindow
- * @param pos
+ * @param browserHasGeolocation, passing from initAutocomplete/geolocation
+ * @param infoWindow, information that shows on display markers
+ * @param pos, position
  * this function is called when not able to find the location
  */
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -225,6 +218,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
  * this function display the route on the map
  */
 function displayRoute(origin, destination) {
+    $("#direction").empty();
     let service = new google.maps.DirectionsService;
     let display = new google.maps.DirectionsRenderer({
 
@@ -256,7 +250,7 @@ function displayRoute(origin, destination) {
 
 /**
  * this function calculates the distance of two points
- * @param result
+ * @param result, distance of two destinations
  */
 function computeTotalDistance(result) {
     let total = 0;

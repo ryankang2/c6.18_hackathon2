@@ -35,6 +35,10 @@ table{
   position: relative
 }
 
+#foodName {
+  font-size: 2.5em
+}
+
 #logo {
   display: inline-block;
   width: 5%;
@@ -58,9 +62,6 @@ table{
 .foodName {
   font-size: 3em;
 }
-/* .nav-wrapper {
-  border: 2px solid black;
-} */
 
 #mapAndPic {
   width: 100%;
@@ -104,7 +105,6 @@ table{
 }
 
 #findMore:active, #reset:active, #goThere:active {
-  /* background-color:rgb(18, 85, 5); */
   box-shadow: 0 5px #666;
   transform: translateY(3px);
 }
@@ -190,4 +190,8 @@ table{
 
 .adp table {
   width: 100%;
+}
+
+.adp-substep{
+  color: white;
 }
