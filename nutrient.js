@@ -19,10 +19,10 @@ function nutritionCallFromServer(){
    let userQuery = food
    let dataForServer = {
        "Content-Type": "application/x-www-form-urlencoded",
-    // "x-app-id": "0657689d",
-    // "x-app-key": "1c577a065dc2109313e314fdb410b965",
-       "x-app-id": "ff571cbd",
-       "x-app-key": "f4112a83315f79c5cdff346b54f08998",
+        "x-app-id": "0657689d",
+        "x-app-key": "1c577a065dc2109313e314fdb410b965",
+    //    "x-app-id": "ff571cbd",
+    //    "x-app-key": "f4112a83315f79c5cdff346b54f08998",
        "x-remote-user-id": "0",
        "Cache-Control": "no-cache",
        "query": 'apple',
@@ -44,7 +44,7 @@ function nutritionCallFromServer(){
        },
        error: function(error){
            if (error.statusText === "Not Found") {
-               alert("Couldn't find " + food + "! Press Ok to go back to home screen");
+               alert("Couldn't find " + food + "! Press OK to go back to home screen");
                location.assign("index.html");
                sessionStorage("setFood", "");
            }
@@ -60,7 +60,7 @@ function nutritionCallFromServer(){
  */
 function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty + " " + foodObj.serving_unit);
-   $(".calories").text(foodObj.nf_calories + " kcal");
+   $(".calories").text(foodObj.nf_calories + " cal");
    $(".carbohydrate").text(foodObj.nf_total_carbohydrate + " g");
    $(".protein").text(foodObj.nf_protein + " g");
    $(".fat").text(foodObj.nf_total_fat + " g");
@@ -68,6 +68,12 @@ function storeNutritionToDOM (foodObj) {
     foodObj.nf_sugars = 0;
    }
    $(".sugar").text(foodObj.nf_sugars + " g");
+   if(foodObj.nf_sodium === null){
+    foodObj.nf_sodium = 0;
+   }
    $(".sodium").text(foodObj.nf_sodium + " mg");
+   if(foodObj.nf_cholesterol === null){
+    foodObj.nf_cholesterol = 0;
+   }
    $(".cholesterol").text(foodObj.nf_cholesterol + " mg");
 }

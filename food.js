@@ -1,11 +1,7 @@
 $(document).ready(initializeApp);
 
 let infoWindow;
-
 let origin = {lat: 33.6348676, lng: -117.7405317};
-
-$(document).ready(initializeApp);
-
 let foodName = sessionStorage.getItem("setFood").toLowerCase();
 let map;
 let previousInfoWindow = false;
@@ -16,7 +12,7 @@ let previousRoute = false;
  */
 function initializeApp() {
   applyClickHandler();
-  $("#foodName").text(foodName);
+  $("#foodName").text(foodName).css("color", "orange");
 }
 
 /**
@@ -226,7 +222,6 @@ function displayRoute(origin, destination) {
         map: map,
         panel: document.getElementById('direction')
     });
-
     service.route({
         origin: origin,
         destination: destination,
